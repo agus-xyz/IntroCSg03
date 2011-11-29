@@ -12,7 +12,7 @@ class Greeting(db.Model):
     date = db.DateTimeProperty(auto_now_add=True)
 
 class Resource(db.Model):
-    resourceid = db.StringProperty()
+    resourceid = db.IntegerProperty()
     author = db.StringProperty()
     resourcetype = db.StringProperty()
     date = db.StringProperty()
@@ -21,19 +21,21 @@ class Resource(db.Model):
     dateUploaded = db.DateTimeProperty(auto_now_add=True)
 
 class Course(db.Model):
-    courseid = db.StringProperty()
+    courseid = db.IntegerProperty()
     name = db.StringProperty()
     college = db.StringProperty()
     url = db.StringProperty
     
 
 class College(db.Model):
-    collegeid = db.StringProperty()
+    collegeid = db.IntegerProperty();
     name = db.StringProperty()
     
     
 class User(db.Model):
     userid = db.StringProperty();
+    userid = db.Index();
+    name = db.StringProperty();
     
 
 class MainPage(webapp.RequestHandler):
