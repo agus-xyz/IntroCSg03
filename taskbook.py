@@ -34,7 +34,7 @@ class College(db.Model):
     
 class User(db.Model):
     userid = db.StringProperty();
-    userid = db.Index();
+    userid = db.IntegerProperty();
     name = db.StringProperty();
     
 
