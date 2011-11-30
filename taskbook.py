@@ -10,39 +10,35 @@ class Greeting(db.Model):
     author = db.UserProperty()
     content = db.StringProperty(multiline=True)
     date = db.DateTimeProperty(auto_now_add=True)
+    
+class College(db.Model):
+    name = db.StringProperty()
 
+class User(db.Model):
+    name = db.StringProperty()
+    studentid = db.StringProperty()
+    college = db.IntegerProperty()
+
+class Course(db.Model):
+    name = db.StringProperty()
+    college = db.StringProperty()
+    url = db.StringProperty()
+      
 class Resource(db.Model):
-    resourceid = db.IntegerProperty()
-    author = db.StringProperty()
+    author = db.IntegerProperty()
     resourcetype = db.StringProperty()
     date = db.StringProperty()
     description = db.StringProperty(multiline=True)
     url = db.StringProperty
-    dateUploaded = db.DateTimeProperty(auto_now_add=True)
-
-class Course(db.Model):
-    courseid = db.IntegerProperty()
-    name = db.StringProperty()
-    college = db.StringProperty()
-    url = db.StringProperty
-    
-
-class College(db.Model):
-    collegeid = db.IntegerProperty();
-    name = db.StringProperty()
-    
-    
-class User(db.Model):
-    userid = db.StringProperty();
-    userid = db.IntegerProperty();
-    name = db.StringProperty();
+    dateUploaded = db.DateTimeProperty(auto_now_add=True)  
     
 
 class MainPage(webapp.RequestHandler):
     def get(self):
         greetings_query = Greeting.all().order('-date')
         greetings = greetings_query.fetch(10)
-
+        colleges = College.all()
+        
         if users.get_current_user():
             url = users.create_logout_url(self.request.uri)
             url_linktext = 'Logout'
@@ -54,6 +50,7 @@ class MainPage(webapp.RequestHandler):
             'greetings': greetings,
             'url': url,
             'url_linktext': url_linktext,
+            'colleges': colleges,
             }
 
         path = os.path.join(os.path.dirname(__file__), 'index.html')
@@ -62,7 +59,10 @@ class MainPage(webapp.RequestHandler):
 class Guestbook(webapp.RequestHandler):
     def post(self):
         greeting = Greeting()
-
+#        college = College()
+#        college.name = self.request.get('content')
+#        college.put();
+        
         if users.get_current_user():
             greeting.author = users.get_current_user()
 
