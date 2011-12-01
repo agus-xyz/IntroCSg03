@@ -8,5 +8,10 @@ handlers:
 - url: /stylesheets
   static_dir: stylesheets
 
+- url: /test/.*
+  script: upload.py
+  
 - url: /.*
   script: taskbook.py
+  
+
