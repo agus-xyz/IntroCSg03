@@ -9,34 +9,34 @@ from google.appengine.ext import db
 class Greeting(db.Model):
     author = db.UserProperty()
     content = db.StringProperty(multiline=True)
-    date = db.DateTimeProperty(auto_now_add=True)
+    date = db.DateTimeProperty(auto_now_add=True)  
     
-class College(db.Model):
-    name = db.StringProperty()
-
 class User(db.Model):
-    name = db.StringProperty()
-    studentid = db.StringProperty()
-    college = db.IntegerProperty()
+    name = db.StringProperty(required=True)
+    password = db.StringListProperty(required=True)
+    email = db.StringListProperty(required=True)
+    studentid = db.StringProperty(required=True)
+    college = db.IntegerProperty(required=True)
+
+class College(db.Model):
+    name = db.StringProperty(required=True)
 
 class Course(db.Model):
-    name = db.StringProperty()
-    college = db.StringProperty()
+    name = db.StringProperty(required=True)
+    college = db.IntegerProperty(required=True)
+    professor = db.StringProperty()
     url = db.StringProperty()
       
 class Resource(db.Model):
-    author = db.IntegerProperty()
+    author = db.IntegerProperty(required=True)
     resourcetype = db.StringProperty()
-    date = db.StringProperty()
+    date = db.StringProperty(required=True)
     description = db.StringProperty(multiline=True)
-    url = db.StringProperty
+    url = db.StringProperty(required=True)
     dateUploaded = db.DateTimeProperty(auto_now_add=True)  
-    
 
 class MainPage(webapp.RequestHandler):
     def get(self):
-        greetings_query = Greeting.all().order('-date')
-        greetings = greetings_query.fetch(10)
         colleges = College.all()
         
         if users.get_current_user():
@@ -47,15 +47,28 @@ class MainPage(webapp.RequestHandler):
             url_linktext = 'Login'
 
         template_values = {
-            'greetings': greetings,
             'url': url,
             'url_linktext': url_linktext,
-            'colleges': colleges,
+            'colleges':colleges,
             }
 
         path = os.path.join(os.path.dirname(__file__), 'index.html')
         self.response.out.write(template.render(path, template_values))
 
+
+class AdminDB(webapp.RequestHandler):
+    def post(self):
+        template_values = {}
+        path = os.path.join(os.path.dirname(__file__), 'admindb.html')
+        self.response.out.write(template.render(path, template_values))
+
+class NewCollege(webapp.RequestHandler):
+    def post(self):
+        college = College()
+        college.name = self.request.get('name')
+        college.put()
+    
+        
 class Guestbook(webapp.RequestHandler):
     def post(self):
         greeting = Greeting()
@@ -72,7 +85,9 @@ class Guestbook(webapp.RequestHandler):
 
 application = webapp.WSGIApplication(
                                      [('/', MainPage),
-                                      ('/sign', Guestbook)],
+                                      ('/sign', Guestbook),
+                                      ('/admindb',AdminDB),
+                                      ('/newCollege',NewCollege)],
                                      debug=True)
 
 def main():
