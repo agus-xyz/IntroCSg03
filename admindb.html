@@ -1,39 +1,71 @@
 <html>
 	
 	<body>
+	
+Administration console for db 
+
+<hr>
+<hr>	
+	
+User
+    college = db.IntegerProperty(required=True)
+<form action="/newUser" method="post">
+	<table>
+		<tr>
+			<td><label>Name</label></td>
+			<td><input type="text" name="name" size="80"/></td>
+		</tr>
+		<tr>
+			<td><label>Pass</label></td>
+			<td><input type="text" name="password" size="80"/></td>
+		</tr>
+		<tr>
+			<td><label>Email</label></td>
+			<td><input type="text" name="email" size="80"></td>
+		</tr>
+		<tr>
+			<td><label>Student ID</label></td>
+			<td><input type="text" name="studentid" size="80"></td>
+		</tr>
+		
+		<tr>
+			<td><input type="submit" value="Create"/></td>
+		</tr>
+	</table>
+</form>
+<hr>
+<hr>
 
 	
-
-Administration console for db 
 <hr>
 <hr>
 College
 <form action="/newCollege" method="post">
 	<table>
 		<tr>
-			<td><label for="name">Name</label></td>
-			<td><input type="text" name="name" id="name" size="80"/></td>
+			<td><label>Name</label></td>
+			<td><input type="text" name="name" size="80"/></td>
 		</tr>
 		<tr>
-		<td>
-		<input type="submit" value="Create"/>
-		</td>
+			<td><input type="submit" value="Create"/></td>
 		</tr>
 	</table>
 </form>
 <hr>
 <hr>
-User
-<form action="/newCollege" method="post">
+
+
+
+
+Course
+<form action="/newUser" method="post">
 	<table>
 		<tr>
 			<td><label for="name">Name</label></td>
-			<td><input type="text" name="name" id="name" size="80"/></td>
+			<td><textarea name="name" rows="1" cols="60"></textarea></td>
 		</tr>
 		<tr>
-		<td>
-		<input type="submit" value="Create"/>
-		</td>
+			<td><input type="submit" value="Create"/></td>
 		</tr>
 	</table>
 </form>

@@ -6,15 +6,10 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
 
  
-class Greeting(db.Model):
-    author = db.UserProperty()
-    content = db.StringProperty(multiline=True)
-    date = db.DateTimeProperty(auto_now_add=True)  
-    
 class User(db.Model):
     name = db.StringProperty(required=True)
-    password = db.StringListProperty(required=True)
-    email = db.StringListProperty(required=True)
+    password = db.StringProperty(required=True)
+    email = db.StringProperty(required=True)
     studentid = db.StringProperty(required=True)
     college = db.IntegerProperty(required=True)
 
@@ -64,29 +59,12 @@ class AdminDB(webapp.RequestHandler):
 
 class NewCollege(webapp.RequestHandler):
     def post(self):
-        college = College()
-        college.name = self.request.get('name')
+        college = College(name = self.request.get('name'))
         college.put()
     
         
-class Guestbook(webapp.RequestHandler):
-    def post(self):
-        greeting = Greeting()
-#        college = College()
-#        college.name = self.request.get('content')
-#        college.put();
-        
-        if users.get_current_user():
-            greeting.author = users.get_current_user()
-
-        greeting.content = self.request.get('content')
-        greeting.put()
-        self.redirect('/')
-
 application = webapp.WSGIApplication(
                                      [('/', MainPage),
-                                      ('/sign', Guestbook),
-                                      ('/admindb',AdminDB),
                                       ('/newCollege',NewCollege)],
                                      debug=True)
 

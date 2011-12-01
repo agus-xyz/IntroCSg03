@@ -8,5 +8,9 @@ handlers:
 - url: /stylesheets
   static_dir: stylesheets
 
+- url: /db
+  script: admindb.py
+
 - url: /.*
   script: taskbook.py
+
