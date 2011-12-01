@@ -8,29 +8,30 @@ Administration console for db
 <hr>	
 	
 User
-<form action="/newUser" method="post">
+<form action="/db/newUser" method="post">
 	<table>
 		<tr>
-			<td><label>Name</label></td>
+			<td>Name</td>
 			<td><input type="text" name="name" size="80"/></td>
 		</tr>
 		<tr>
-			<td><label>Pass</label></td>
+			<td>Pass</td>
 			<td><input type="text" name="password" size="80"/></td>
 		</tr>
 		<tr>
-			<td><label>Email</label></td>
+			<td>Email</td>
 			<td><input type="text" name="email" size="80"></td>
 		</tr>
 		<tr>
-			<td><label>Student ID</label></td>
+			<td>Student ID</td>
 			<td><input type="text" name="studentid" size="80"></td>
 		</tr>
-			<td><label>College</label></td>
+			<td>College</td>
 			<td><select name="college">
 				{% for college in colleges %} 
-					<option value="{{college.id}}">{{ college.name }}</option>
-				 {% endfor %} </td>
+					<option value="{{college.collegeid}}">{{ college.name }}</option>
+				 {% endfor %}
+				 </select></td>
 		<tr>
 			<td><input type="submit" value="Create"/></td>
 		</tr>
@@ -43,10 +44,10 @@ User
 
 
 College
-<form action="/newCollege" method="post">
+<form action="/db/newCollege" method="post">
 	<table>
 		<tr>
-			<td><label>Name</label></td>
+			<td>Name</td>
 			<td><input type="text" name="name" size="80"/></td>
 		</tr>
 		<tr>

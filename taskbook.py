@@ -7,6 +7,7 @@ from google.appengine.ext import db
 
  
 class User(db.Model):
+    userid = db.IntegerProperty()
     name = db.StringProperty(required=True)
     password = db.StringProperty(required=True)
     email = db.StringProperty(required=True)
@@ -14,15 +15,18 @@ class User(db.Model):
     college = db.IntegerProperty(required=True)
 
 class College(db.Model):
+    collegeid = db.IntegerProperty()
     name = db.StringProperty(required=True)
 
 class Course(db.Model):
+    courseid = db.IntegerProperty()
     name = db.StringProperty(required=True)
     college = db.IntegerProperty(required=True)
     professor = db.StringProperty()
     url = db.StringProperty()
       
 class Resource(db.Model):
+    resourceid = db.IntegerProperty()
     author = db.IntegerProperty(required=True)
     resourcetype = db.StringProperty()
     date = db.StringProperty(required=True)
@@ -64,8 +68,7 @@ class NewCollege(webapp.RequestHandler):
     
         
 application = webapp.WSGIApplication(
-                                     [('/', MainPage),
-                                      ('/newCollege',NewCollege)],
+                                     [('/', MainPage)],
                                      debug=True)
 
 def main():

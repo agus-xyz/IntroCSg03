@@ -8,7 +8,7 @@ handlers:
 - url: /stylesheets
   static_dir: stylesheets
 
-- url: /db
+- url: /db.*
   script: admindb.py
 
 - url: /.*
