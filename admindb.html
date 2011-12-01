@@ -8,7 +8,6 @@ Administration console for db
 <hr>	
 	
 User
-    college = db.IntegerProperty(required=True)
 <form action="/newUser" method="post">
 	<table>
 		<tr>
@@ -27,18 +26,22 @@ User
 			<td><label>Student ID</label></td>
 			<td><input type="text" name="studentid" size="80"></td>
 		</tr>
-		
+			<td><label>College</label></td>
+			<td><select name="college">
+				{% for college in colleges %} 
+					<option value="{{college.id}}">{{ college.name }}</option>
+				 {% endfor %} </td>
 		<tr>
 			<td><input type="submit" value="Create"/></td>
 		</tr>
 	</table>
 </form>
-<hr>
-<hr>
 
 	
 <hr>
 <hr>
+
+
 College
 <form action="/newCollege" method="post">
 	<table>

@@ -37,6 +37,7 @@ class NewUser(webapp.RequestHandler):
     def post(self):
         college = College(name = self.request.get('name'))
         college.put()
+        self.redirect('/db')
 
 class NewCourse(webapp.RequestHandler):
     def post(self):
