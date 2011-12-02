@@ -7,29 +7,32 @@ from google.appengine.ext import db
 
  
 class User(db.Model):
-    userid = db.IntegerProperty()
     name = db.StringProperty(required=True)
     password = db.StringProperty(required=True)
     email = db.StringProperty(required=True)
     studentid = db.StringProperty(required=True)
     college = db.IntegerProperty(required=True)
+    admin = db.BooleanProperty(required=True)
 
 class College(db.Model):
-    collegeid = db.IntegerProperty()
+    collegeid = db.IntegerProperty(required=True)
     name = db.StringProperty(required=True)
 
 class Course(db.Model):
-    courseid = db.IntegerProperty()
+    serialnumber = db.IntegerProperty(required=True)
     name = db.StringProperty(required=True)
     college = db.IntegerProperty(required=True)
     professor = db.StringProperty()
+    room = db.StringProperty()
     url = db.StringProperty()
       
 class Resource(db.Model):
-    resourceid = db.IntegerProperty()
-    author = db.IntegerProperty(required=True)
+    name = db.StringProperty(required=True)
+    resourceid = db.IntegerProperty(required=True)
+    course = db.IntegerProperty(required=True)
+    author = db.StringProperty(required=True)
     resourcetype = db.StringProperty()
-    date = db.StringProperty(required=True)
+    date = db.DateProperty(required=True)
     description = db.StringProperty(multiline=True)
     url = db.StringProperty(required=True)
     dateUploaded = db.DateTimeProperty(auto_now_add=True)  
@@ -63,7 +66,7 @@ class AdminDB(webapp.RequestHandler):
 
 class NewCollege(webapp.RequestHandler):
     def post(self):
-        college = College(name = self.request.get('name'))
+        college = College(name=self.request.get('name'))
         college.put()
     
         
