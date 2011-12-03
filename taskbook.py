@@ -7,6 +7,7 @@ from google.appengine.ext import db
 
  
 class User(db.Model):
+    
     name = db.StringProperty(required=True)
     password = db.StringProperty(required=True)
     email = db.StringProperty(required=True)
@@ -15,7 +16,6 @@ class User(db.Model):
     admin = db.BooleanProperty(required=True)
 
 class College(db.Model):
-    collegeid = db.IntegerProperty(required=True)
     name = db.StringProperty(required=True)
 
 class Course(db.Model):
@@ -28,9 +28,8 @@ class Course(db.Model):
       
 class Resource(db.Model):
     name = db.StringProperty(required=True)
-    resourceid = db.IntegerProperty(required=True)
     course = db.IntegerProperty(required=True)
-    author = db.StringProperty(required=True)
+    author = db.IntegerProperty(required=True)
     resourcetype = db.StringProperty()
     date = db.DateProperty(required=True)
     description = db.StringProperty(multiline=True)
