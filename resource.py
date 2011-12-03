@@ -21,6 +21,7 @@ class ResourcePage(webapp.RequestHandler):
             self.error(404)
         if blob_instance:
             type = blob_instance.content_type
+        if self.request.host_url:
             resource = ''.join([self.request.host_url, '/test/serve/', resource])
             template_values = {
             'resource': resource,
