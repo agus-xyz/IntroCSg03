@@ -8,13 +8,12 @@ handlers:
 - url: /stylesheets
   static_dir: stylesheets
 
-<<<<<<< HEAD
 - url: /db.*
   script: admindb.py
 
 - url: /.*
   script: taskbook.py
-=======
+
 - url: /images
   static_dir: images
 
@@ -24,9 +23,8 @@ handlers:
 - url: /resource/.*
   script: resource.py
   
-- url: /.*
-  script: taskbook.py
+
   
 
->>>>>>> 828494bad9b580a852bfd111cc26d53ecba6d03d
+
 
