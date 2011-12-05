@@ -1,16 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
- </head>
+<html>
 
 <body>
   Administration console for db
   <hr />
   <hr />
-  User
-
+  USER
+     <hr />
+	Adding
   <form action="/db/newUser" method="post">
     <table>
       <tr>
@@ -20,7 +16,7 @@
 
       <tr>
         <td>Pass</td>
-        <td><input type="text" name="password" size="80" /></td>
+        <td><input type="password" name="password" size="80" /></td>
       </tr>
 
       <tr>
@@ -37,7 +33,7 @@
         <td>College</td>
         <td><select type="text" name="college">
         {% for college in colleges %}
-          <option value="{{college.collegeid}}">
+          <option value="{{college.key.id}}">
             {{ college.name }}
           </option>
          {% endfor %} 
@@ -55,11 +51,83 @@
       </tr>
     </table>
   </form>
+<hr/>
+    Removing
+     <form action="/db/removeUser" method="post">
+     <table>
+     <tr>
+        <td><select type="text" name="id">
+        {% for user in users %}
+          <option value="{{user.key.id}}">
+            {{ user.name }}
+          </option>
+         {% endfor %} 
+        </select></td>
+      </tr>
+           <tr>
+        <td><input type="submit" value="Remove" /></td>
+        </table>
+      </tr>
+      </form>
+     <hr />
+  Editing
+    <form action="/db/editUser" method="post">
+    <table>
+     <tr>
+        <td>User</td>
+        <td><select type="text" name="id">
+        {% for user in users %}
+          <option value="{{user.key.id}}">
+            {{ user.name }}
+          </option>
+         {% endfor %} 
+        </select></td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td><input type="text" name="name" size="80"/></td>
+      </tr>
+      <tr>
+        <td>Pass</td>
+        <td><input type="password" name="password" size="80" /></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td><input type="text" name="email" size="80" /></td>
+      </tr>
+      <tr>
+        <td>Student ID</td>
+        <td><input type="text" name="studentid" size="80" /></td>
+      </tr>
+      <tr>
+        <td>College</td>
+        <td><select type="text" name="college">
+        {% for college in colleges %}
+          <option value="{{college.key.id}}">
+            {{ college.name }}
+          </option>
+         {% endfor %} 
+        </select></td>
+      </tr>
+      <tr>
+      	<td>Admin</td>
+        <td><select name="admin">
+          		<option value="true">YES</option>
+          		<option value="">NO</option>
+           </select></td>
+      </tr>
+      <tr>
+        <td><input type="submit" value="Edit" /></td>
+      </tr>
+    </table>
+  </form>
   <hr />
   <hr />
   <hr />
-  College
 
+  COLLEGE
+    <hr />
+  Adding
   <form action="/db/newCollege" method="post">
     <table>
       <tr>
@@ -73,10 +141,55 @@
       </tr>
     </table>
   </form>
+   <hr />
+    Removing
+     <form action="/db/removeCollege" method="post">
+     <table>
+     <tr>
+        <td><select type="text" name="id">
+        {% for college in colleges %}
+          <option value="{{college.key.id}}">
+            {{ college.name }}
+          </option>
+         {% endfor %} 
+        </select></td>
+      </tr>
+           <tr>
+        <td><input type="submit" value="Remove" /></td>
+        </table>
+      </tr>
+      </form>
+     <hr />
+  Editing
+  <form action="/db/editCollege" method="post">
+    <table>
+    	<tr>
+    	    <td>College</td>
+        <td><select type="text" name="id">
+        {% for college in colleges %}
+          <option value="{{college.key.id}}">
+            {{ college.name }}
+          </option>
+         {% endfor %} 
+        </select></td>
+    	</tr>
+      <tr>
+        <td>Name</td>
+
+        <td><input type="text" name="name" size="80" /></td>
+      </tr>
+
+      <tr>
+        <td><input type="submit" value="Edit" /></td>
+      </tr>
+    </table>
+  </form>
   <hr />
   <hr />
   <hr />
-  Course
+  COURSE
+        <hr />
+Adding
                        
   <form action="/db/newCourse" method="post">
     <table>
@@ -92,7 +205,7 @@
         <td>College</td>
         <td><select type="text" name="college">
         {% for college in colleges %}
-          <option value="{{college.collegeid}}">
+          <option value="{{college.key.id}}">
             {{ college.name }}
           </option>
          {% endfor %} 
@@ -116,10 +229,80 @@
       </tr>
     </table>
   </form>
+   <hr />
+    Removing
+         <form action="/db/removeCourse" method="post">
+     <table>
+     <tr>
+        <td><select type="text" name="id">
+        {% for course in courses %}
+          <option value="{{course.key.id}}">
+            {{ course.name }}
+          </option>
+         {% endfor %} 
+        </select></td>
+      </tr>
+           <tr>
+        <td><input type="submit" value="Remove" /></td>
+        </table>
+      </tr>
+      </form>
+     <hr />
+  Editing
+  <form action="/db/editCourse" method="post">
+    <table>
+    <tr>      
+        <td>Course</td>
+        <td><select type="text" name="id">
+        {% for course in courses %}
+          <option value="{{course.key.id}}">
+            {{ course.name }}
+          </option>
+         {% endfor %} 
+        </select></td>
+      </tr>
+     <tr>
+        <td>Serial Number</td>
+        <td><input type="text" name="serialnumber" size="80" /></td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td><input type="text" name="name" size="80" /></td>
+      </tr>
+       <tr>
+        <td>College</td>
+        <td><select type="text" name="college">
+        {% for college in colleges %}
+          <option value="{{college.key.id}}">
+            {{ college.name }}
+          </option>
+         {% endfor %} 
+        </select></td>
+      </tr>
+      <tr>
+        <td>Professor</td>
+        <td><input type="text" name="professor" size="80" /></td>
+      </tr>
+        <tr>
+        <td>Room</td>
+        <td><input type="text" name="room" size="80" /></td>
+      </tr>
+      </tr>
+        <tr>
+        <td>Url</td>
+        <td><input type="text" name="url" size="80" /></td>
+      </tr>
+      <tr>
+        <td><input type="submit" value="Edit" /></td>
+      </tr>
+    </table>
+  </form>
   <hr />
   <hr />
   <hr />
-  Resource
+  RESOURCE
+        <hr />
+Adding
 
   <form action="/db/newResource" method="post">
     <table>
@@ -131,17 +314,23 @@
         <td>Author</td>
         <td><select type="text" name="author">
         {% for user in users %}
-          <option value="{{user.studentid}}">
+          <option value="{{user.key.id}}">
             {{ user.name }}
           </option>
          {% endfor %} 
         </select></td>
       </tr>
-      <tr>
+      <tr> 
+       <td>Completion Date</td>
+        <td>year<input type="text" name="date.year" size="10"/>
+       	 month<input type="text" name="date.month" size="5" />
+         day <input type="text" name="date.day" size="5" /></td>
+      </tr> 
+      <tr>      
         <td>Course</td>
         <td><select type="text" name="course">
         {% for course in courses %}
-          <option value="{{course.serialnumber}}">
+          <option value="{{course.key.id}}">
             {{ course.name }}
           </option>
          {% endfor %} 
@@ -153,7 +342,7 @@
             <option value="exam">Exam</option>
             <option value="homework">Homework/Assignment</option>
             <option value="notes">Notes</option>
-            <option value="notes">Other</option>
+            <option value="other">Other</option>
         </select></td>
       </tr>
       <tr>
@@ -171,6 +360,91 @@
       </tr>
     </table>
   </form>
-  
+   <hr />
+    Removing
+         <form action="/db/removeResource" method="post">
+     <table>
+     <tr>
+        <td><select type="text" name="id">
+        {% for resource in resources %}
+          <option value="{{resource.key.id}}">
+            {{ resource.name }}
+          </option>
+         {% endfor %} 
+        </select></td>
+      </tr>
+           <tr>
+        <td><input type="submit" value="Remove" /></td>
+        </table>
+      </tr>
+      </form>
+     <hr />
+  Editing
+  <form action="/db/editResource" method="post">
+    <table>
+    <tr>
+        <td><select type="text" name="id">
+        {% for resource in resources %}
+          <option value="{{resource.key.id}}">
+            {{ resource.name }}
+          </option>
+         {% endfor %} 
+        </select></td>
+      </tr>
+     <tr>
+        <td>Name</td>
+        <td><input type="text" name="name" size="80" /></td>
+      </tr>
+      <tr>
+        <td>Author</td>
+        <td><select type="text" name="author">
+        {% for user in users %}
+          <option value="{{user.key.id}}">
+            {{ user.name }}
+          </option>
+         {% endfor %} 
+        </select></td>
+      </tr>
+      <tr> 
+       <td>Completion Date</td>
+        <td>year<input type="text" name="date.year" size="10"/>
+       	 month<input type="text" name="date.month" size="5" />
+         day <input type="text" name="date.day" size="5" /></td>
+      </tr> 
+      <tr>      
+        <td>Course</td>
+        <td><select type="text" name="course">
+        {% for course in courses %}
+          <option value="{{course.key.id}}">
+            {{ course.name }}
+          </option>
+         {% endfor %} 
+        </select></td>
+      </tr>
+      <tr>
+        <td>Resourcetype</td>
+        <td><select type="text" name="resourcetype">
+            <option value="exam">Exam</option>
+            <option value="homework">Homework/Assignment</option>
+            <option value="notes">Notes</option>
+            <option value="other">Other</option>
+        </select></td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td><textarea type="text" name="description" lines="5" columns="80" ></textarea></td>
+      </tr>
+      
+       </tr>
+        <tr>
+        <td>Url</td>
+        <td><input type="text" name="url" size="80" /></td>
+      </tr> 
+      <tr>
+        <td><input type="submit" value="Edit" /></td>
+      </tr>
+    </table>
+  </form>
+   <hr />
 </body>
 </html>

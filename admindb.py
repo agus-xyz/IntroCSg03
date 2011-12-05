@@ -5,10 +5,11 @@ from taskbook import College
 from taskbook import Course
 from taskbook import Resource
 
+import datetime
+
 from google.appengine.ext.webapp import template
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
-
 
 class MainPage(webapp.RequestHandler):
     def get(self):
@@ -41,53 +42,113 @@ class NewUser(webapp.RequestHandler):
 
 class NewCollege(webapp.RequestHandler):
     def post(self):
-        colleges = College.all()
-        currentid = 0
-        for college in colleges:
-            if college.collegeid > currentid:
-                currentid = college.collegeid
-         
-        college = College(name=self.request.get('name'),
-                          collegeid=currentid + 1)
+        college = College(name=self.request.get('name'))
         college.put()
         self.redirect('/db')
         
 class NewCourse(webapp.RequestHandler):
     def post(self):
-        course = Course( serialnumber = int(self.request.get('serialnumber')),
+        course = Course(serialnumber=int(self.request.get('serialnumber')),
                          name=self.request.get('name'),
                          college=int(self.request.get('college')),
-                         professor = self.request.get('professor'),
-                         room = self.request.get('room'),
-                         url = self.request.get('url'))
+                         professor=self.request.get('professor'),
+                         room=self.request.get('room'),
+                         url=self.request.get('url'))
         course.put()
         self.redirect('/db')
 
 class NewResource(webapp.RequestHandler):
     def post(self):
-        resources = Resource.all()
-        currentid = 0
-        for resource in resources:
-            if resource.resourceid > currentid:
-                currentid = resource.resourceid
-              
-        resource = Resource(resourceid = currentid + 1,
-                            course = self.request.get('course'),
-                            name = self.request.get('name'),
-                            author = self.request.get('author'),
-                            resourcetype = self.request.get('resourcetype'),
-                            description = self.request.get('description'),
-                            url = self.request.get('url'))
+        resource = Resource(course=int(self.request.get('course')),
+                            name=self.request.get('name'),
+                            author=int(self.request.get('author')),
+                            resourcetype=self.request.get('resourcetype'),
+                            description=self.request.get('description'),
+                            url=self.request.get('url'),
+                            date=datetime.date(year=int(self.request.get('date.year')), month=int(self.request.get('date.month')), day=int(self.request.get('date.day'))))
         resource.put()
         self.redirect('/db')        
-    
+
+class RemoveUser(webapp.RequestHandler):
+    def post(self):
+        user = User.get_by_id(int(self.request.get('id'))) 
+        user.delete()
+        self.redirect('/db')
+            
+class RemoveCollege(webapp.RequestHandler):
+    def post(self):
+        college = College.get_by_id(int(self.request.get('id')))
+        college.delete()
+        self.redirect('/db') 
+class RemoveCourse(webapp.RequestHandler):
+    def post(self):
+        course = Course.get_by_id(int(self.request.get('id')))
+        course.delete()
+        self.redirect('/db') 
         
+class RemoveResource(webapp.RequestHandler):
+    def post(self):  
+        resource = Resource.get_by_id(int(self.request.get('id')))
+        resource.delete()
+        self.redirect('/db')
+        
+class EditUser(webapp.RequestHandler):
+    def post(self):
+        user = User.get_by_id(int(self.request.get('id')))
+        user.name = self.request.get('name')
+        user.password = self.request.get('password')
+        user.email = self.request.get('email')
+        user.studentid = self.request.get('studentid')
+        user.college = int(self.request.get('college'))
+        user.admin = bool(self.request.get('admin'))
+        user.put()
+        self.redirect('/db')
+       
+class EditCollege(webapp.RequestHandler):
+    def post(self):
+        college = College.get_by_id(int(self.request.get('id')))
+        college.name = self.request.get('name')
+        college.put()
+        self.redirect('/db')
+        
+class EditCourse(webapp.RequestHandler):
+    def post(self):
+        course = Course.get_by_id(int(self.request.get('id')))
+        course.serialnumber = int(self.request.get('serialnumber'))
+        course.name = self.request.get('name')
+        course.college = int(self.request.get('college'))
+        course.professor = self.request.get('professor')
+        course.room = self.request.get('room')
+        course.url = self.request.get('url')
+        course.put()
+        self.redirect('/db')
+
+class EditResource(webapp.RequestHandler):
+    def post(self):
+        resource = Resource.get_by_id(int(self.request.get('id')))
+        resource.course = self.request.get('course')
+        resource.name = self.request.get('name')
+        resource.author = self.request.get('author')
+        resource.resourcetype = self.request.get('resourcetype')
+        resource.description = self.request.get('description')
+        resource.url = self.request.get('url')
+        resource.put()
+        self.redirect('/db') 
+ 
 application = webapp.WSGIApplication(
                                      [('/db', MainPage),
                                       ('/db/newCollege', NewCollege),
                                       ('/db/newUser', NewUser),
                                       ('/db/newCourse', NewCourse),
-                                      ('/db/newResource', NewResource)],
+                                      ('/db/newResource', NewResource),
+                                      ('/db/removeCollege', RemoveCollege),
+                                      ('/db/removeUser', RemoveUser),
+                                      ('/db/removeCourse', RemoveCourse),
+                                      ('/db/removeResource', RemoveResource),
+                                      ('/db/editCollege', EditCollege),
+                                      ('/db/editUser', EditUser),
+                                      ('/db/editCourse', EditCourse),
+                                      ('/db/editResource', EditResource)],
                                      debug=True)
 
 def main():
