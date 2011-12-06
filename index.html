@@ -7,5 +7,9 @@
           {{ college.name }}<br> 
       {% endfor %}
         <a href="{{ url }}">{{ url_linktext }}</a>
-      </body>
+        <form action="/admindb" method="post">
+        <input type="submit" value="adminDB"/>
+        </form>
+
+  </body>
 </html>

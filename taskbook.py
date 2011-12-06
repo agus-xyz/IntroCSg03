@@ -6,32 +6,31 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
 
  
-class User(db.Model):
+class Greeting(db.Model):
+    author = db.UserProperty()
+    content = db.StringProperty(multiline=True)
+    date = db.DateTimeProperty(auto_now_add=True)  
     
+class User(db.Model):
     name = db.StringProperty(required=True)
-    password = db.StringProperty(required=True)
-    email = db.StringProperty(required=True)
+    password = db.StringListProperty(required=True)
+    email = db.StringListProperty(required=True)
     studentid = db.StringProperty(required=True)
     college = db.IntegerProperty(required=True)
-    admin = db.BooleanProperty(required=True)
 
 class College(db.Model):
     name = db.StringProperty(required=True)
 
 class Course(db.Model):
-    serialnumber = db.IntegerProperty(required=True)
     name = db.StringProperty(required=True)
     college = db.IntegerProperty(required=True)
     professor = db.StringProperty()
-    room = db.StringProperty()
     url = db.StringProperty()
       
 class Resource(db.Model):
-    name = db.StringProperty(required=True)
-    course = db.IntegerProperty(required=True)
     author = db.IntegerProperty(required=True)
     resourcetype = db.StringProperty()
-    date = db.DateProperty(required=True)
+    date = db.StringProperty(required=True)
     description = db.StringProperty(multiline=True)
     url = db.StringProperty(required=True)
     dateUploaded = db.DateTimeProperty(auto_now_add=True)  
@@ -65,12 +64,30 @@ class AdminDB(webapp.RequestHandler):
 
 class NewCollege(webapp.RequestHandler):
     def post(self):
-        college = College(name=self.request.get('name'))
+        college = College()
+        college.name = self.request.get('name')
         college.put()
     
         
+class Guestbook(webapp.RequestHandler):
+    def post(self):
+        greeting = Greeting()
+#        college = College()
+#        college.name = self.request.get('content')
+#        college.put();
+        
+        if users.get_current_user():
+            greeting.author = users.get_current_user()
+
+        greeting.content = self.request.get('content')
+        greeting.put()
+        self.redirect('/')
+
 application = webapp.WSGIApplication(
-                                     [('/', MainPage)],
+                                     [('/', MainPage),
+                                      ('/sign', Guestbook),
+                                      ('/admindb',AdminDB),
+                                      ('/newCollege',NewCollege)],
                                      debug=True)
 
 def main():
