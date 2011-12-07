@@ -25,7 +25,7 @@ class MainPage(webapp.RequestHandler):
             'resources':resources,
             }
 
-        path = os.path.join(os.path.dirname(__file__), 'admindb.html')
+        path = os.path.join(os.path.dirname(__file__), 'html/admindb.html')
         self.response.out.write(template.render(path, template_values))
 
 class NewUser(webapp.RequestHandler):
