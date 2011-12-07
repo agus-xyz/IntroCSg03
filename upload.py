@@ -12,7 +12,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 class TestHandler(webapp.RequestHandler):
     def get(self):
-        upload_url = blobstore.create_upload_url('/test/upload')
+        upload_url = blobstore.create_upload_url('/files/upload')
         self.response.out.write('<html><body>')
         self.response.out.write('<form action="%s" method="POST" enctype="multipart/form-data">' % upload_url)
         self.response.out.write("""Upload File: <input type="file" name="file"><br> <input type="submit" 
@@ -34,9 +34,9 @@ class ServeHandler(blobstore_handlers.BlobstoreDownloadHandler):
         self.send_blob(blob_info)
 def main():
     application = webapp.WSGIApplication(
-          [('/test/upload.html', TestHandler),
-           ('/test/upload', UploadHandler),
-           ('/test/serve/([^/]+)?', ServeHandler),
+          [('/files/upload.html', TestHandler),
+           ('/files/upload', UploadHandler),
+           ('/files/serve/([^/]+)?', ServeHandler),
           ], debug=True)
     run_wsgi_app(application)
 

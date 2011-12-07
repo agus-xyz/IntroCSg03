@@ -11,7 +11,7 @@ handlers:
 - url: /images
   static_dir: images
 
-- url: /test/.*
+- url: /files/.*
   script: upload.py
 
 - url: /resource/.*

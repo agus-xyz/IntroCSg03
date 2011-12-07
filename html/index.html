@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    {% for college in colleges %}
+          {{ college.name }}<br> 
+      {% endfor %}
+        <a href="{{ url }}">{{ url_linktext }}</a>
+        <form action="/admindb" method="post">
+        <input type="submit" value="adminDB"/>
+        </form>
+
+  </body>
+</html>
