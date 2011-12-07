@@ -12,18 +12,17 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 class TestHandler(webapp.RequestHandler):
     def get(self):
-        upload_url = blobstore.create_upload_url('/test/upload')
-        self.response.out.write('<html><body>')
-        self.response.out.write('<form action="%s" method="POST" enctype="multipart/form-data">' % upload_url)
-        self.response.out.write("""Upload File: <input type="file" name="file"><br> <input type="submit" 
-            name="submit" value="Submit"> </form></body></html>""")
-
+        upload_url = blobstore.create_upload_url('/files/upload')
+        template_values = { 'action': upload_url }
+        path = os.path.join(os.path.dirname(__file__), 'html/upload.html')
+        self.response.out.write(template.render(path, template_values))
+        
 class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
     def post(self):
         upload_files = self.get_uploads('file')  # 'file' is file upload field in the form
         blob_info = upload_files[0]
         if blob_info:
-            self.redirect('/')
+            self.redirect('/resource/%s' % blob_info.key())
         else:
             self.error(404)
 			
@@ -34,9 +33,9 @@ class ServeHandler(blobstore_handlers.BlobstoreDownloadHandler):
         self.send_blob(blob_info)
 def main():
     application = webapp.WSGIApplication(
-          [('/test/upload.html', TestHandler),
-           ('/test/upload', UploadHandler),
-           ('/test/serve/([^/]+)?', ServeHandler),
+          [('/files/upload.html', TestHandler),
+           ('/files/upload', UploadHandler),
+           ('/files/serve/([^/]+)?', ServeHandler),
           ], debug=True)
     run_wsgi_app(application)
 

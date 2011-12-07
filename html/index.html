@@ -1,5 +1,6 @@
 <html>
   <head>
+<<<<<<< HEAD
      <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
@@ -42,4 +43,18 @@
 
         
       </body>
+=======
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    {% for college in colleges %}
+          {{ college.name }}<br> 
+      {% endfor %}
+        <a href="{{ url }}">{{ url_linktext }}</a>
+        <form action="/admindb" method="post">
+        <input type="submit" value="adminDB"/>
+        </form>
+
+  </body>
+>>>>>>> aisman2
 </html>

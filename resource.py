@@ -21,13 +21,12 @@ class ResourcePage(webapp.RequestHandler):
             self.error(404)
         if blob_instance:
             type = blob_instance.content_type
-        if self.request.host_url:
-            resource = ''.join([self.request.host_url, '/test/serve/', resource])
+            resource = ''.join([self.request.host_url, '/files/serve/', resource])
             template_values = {
             'resource': resource,
             'type': type,
             }
-            path = os.path.join(os.path.dirname(__file__), 'resource.html')
+            path = os.path.join(os.path.dirname(__file__), 'html/resource.html')
             self.response.out.write(template.render(path, template_values))
         else:
             self.error(404)
