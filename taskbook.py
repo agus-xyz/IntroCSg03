@@ -52,14 +52,14 @@ class MainPage(webapp.RequestHandler):
             'colleges':colleges,
             }
 
-        path = os.path.join(os.path.dirname(__file__), 'index.html')
+        path = os.path.join(os.path.dirname(__file__), 'html/index.html')
         self.response.out.write(template.render(path, template_values))
 
 
 class AdminDB(webapp.RequestHandler):
     def post(self):
         template_values = {}
-        path = os.path.join(os.path.dirname(__file__), 'admindb.html')
+        path = os.path.join(os.path.dirname(__file__), 'html/admindb.html')
         self.response.out.write(template.render(path, template_values))
 
 class NewCollege(webapp.RequestHandler):

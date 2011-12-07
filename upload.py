@@ -23,7 +23,7 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
         upload_files = self.get_uploads('file')  # 'file' is file upload field in the form
         blob_info = upload_files[0]
         if blob_info:
-            self.redirect('/')
+            self.redirect('/resource/%s' % blob_info.key())
         else:
             self.error(404)
 			
