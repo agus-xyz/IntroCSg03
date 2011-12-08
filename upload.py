@@ -13,7 +13,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 class TestHandler(webapp.RequestHandler):
     def get(self):
         upload_url = blobstore.create_upload_url('/files/upload')
-        template_values = { 'action': upload_url }
+        template_values = { 'action': upload_url, }
         path = os.path.join(os.path.dirname(__file__), 'html/upload.html')
         self.response.out.write(template.render(path, template_values))
         
