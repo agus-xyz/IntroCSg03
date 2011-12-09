@@ -10,30 +10,17 @@ class Greeting(db.Model):
     author = db.UserProperty()
     content = db.StringProperty(multiline=True)
     date = db.DateTimeProperty(auto_now_add=True)
-    
-class User(db.Model):
-    name = db.StringProperty(required=True)
-    password = db.StringListProperty(required=True)
-    email = db.StringListProperty(required=True)
-    studentid = db.StringProperty(required=True)
-    college = db.IntegerProperty(required=True)
 
 class College(db.Model):
-    name = db.StringProperty(required=True)
+    col_id = db.IntegerProperty(required=True)
+    col_name = db.StringProperty(required=True)
 
 class Course(db.Model):
-    name = db.StringProperty(required=True)
-    college = db.IntegerProperty(required=True)
-    professor = db.StringProperty()
-    url = db.StringProperty()
+    cour_id = db.IntegerProperty(required=True)
+    cour_name = db.StringProperty(required=True)
+    cour_college = db.IntegerProperty(required=True)
+    cour_professor = db.StringProperty(required=True)
       
-class Resource(db.Model):
-    author = db.IntegerProperty(required=True)
-    resourcetype = db.StringProperty()
-    date = db.StringProperty(required=True)
-    description = db.StringProperty(multiline=True)
-    url = db.StringProperty(required=True)
-    dateUploaded = db.DateTimeProperty(auto_now_add=True)
 
 class MainPage(webapp.RequestHandler):
     def get(self):

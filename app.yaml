@@ -12,7 +12,8 @@ handlers:
   static_dir: images
 
 - url: /files/.*
-  script: upload.py
+  script: files.py
+  login: required
 
 - url: /resource/.*
   script: resource.py
