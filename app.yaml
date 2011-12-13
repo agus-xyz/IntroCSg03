@@ -1,7 +1,10 @@
-application: ntuintrocsg03
+application: dev~ntuintrocsg03
 version: 2
 runtime: python
 api_version: 1
+
+builtins:
+- remote_api: on
 
 handlers:
 
@@ -10,14 +13,23 @@ handlers:
 
 - url: /images
   static_dir: images
+  
+- url: /js
+  static_dir: js
 
-- url: /files/.*
+- url: /files/upload.html
   script: files.py
   login: required
 
+- url: /files/upload
+  script: files.py
+  login: required
+
+- url: /files/.*
+  script: files.py
+
 - url: /resource/.*
   script: resource.py
-  
+
 - url: /.*
   script: taskbook.py
-  

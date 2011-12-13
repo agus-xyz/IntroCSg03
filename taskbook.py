@@ -12,11 +12,9 @@ class Greeting(db.Model):
     date = db.DateTimeProperty(auto_now_add=True)
 
 class College(db.Model):
-    col_id = db.IntegerProperty(required=True)
-    col_name = db.StringProperty(required=True)
+    col_name = db.StringProperty()
 
 class Course(db.Model):
-    cour_id = db.IntegerProperty(required=True)
     cour_name = db.StringProperty(required=True)
     cour_college = db.IntegerProperty(required=True)
     cour_professor = db.StringProperty(required=True)
@@ -51,17 +49,18 @@ class AdminDB(webapp.RequestHandler):
 
 class NewCollege(webapp.RequestHandler):
     def post(self):
-        college = College()
-        college.name = self.request.get('name')
-        college.put()
+        #college = College()
+        #college.name = self.request.get('name')
+        #college.put()
+        greeting = ""
     
         
 class Guestbook(webapp.RequestHandler):
     def post(self):
         greeting = Greeting()
-# college = College()
-# college.name = self.request.get('content')
-# college.put();
+        #college = College()
+        #college.name = self.request.get('content')
+        #college.put();
         
         if users.get_current_user():
             greeting.author = users.get_current_user()
