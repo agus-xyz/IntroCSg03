@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 #
-
 import os
 import urllib
 import sys
-import apis.googl
-
 
 from google.appengine.ext import blobstore
 from google.appengine.ext import webapp
@@ -14,7 +11,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
 from django.utils import simplejson
-
+from apis import bitly
 
 class College(db.Model):
     col_name = db.StringProperty(required=True)
@@ -36,9 +33,9 @@ class Resource(db.Model):
     res_college = db.ReferenceProperty(College, required=True)
     res_course_ = db.ReferenceProperty(Course, required=True)
     res_short_uri = db.LinkProperty(required=True)
-    res_comment = db.TextProperty()
-    
+        
 class Comment(db.Model):
+    co_text = db.TextProperty()
     co_user = db.UserProperty(required=True)
     co_content = db.StringProperty(required=True, multiline=True)
     co_upvotes = db.IntegerProperty(required=True)
@@ -70,6 +67,7 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
         upload_files = self.get_uploads('file')  # 'file' is file upload field in the form
         blob_info = upload_files[0]
         if blob_info:
+            
             self.redirect('/resource/%s' % str(blob_info.key()))
         else:
             self.error(404)

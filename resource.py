@@ -10,7 +10,7 @@ from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
-
+from apis import bitly
 
 class ResourcePage(webapp.RequestHandler):
     def get(self, resource):
@@ -21,8 +21,10 @@ class ResourcePage(webapp.RequestHandler):
             self.error(404)
         if blob_instance:
             type = blob_instance.content_type
+            filename = blob_instance.filename
             resource = ''.join([self.request.host_url, '/files/serve/', resource])
             template_values = {
+            'filename': filename,
             'resource': resource,
             'type': type,
             }
