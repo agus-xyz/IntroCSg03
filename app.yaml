@@ -3,6 +3,9 @@ version: agus
 runtime: python
 api_version: 1
 
+builtins:
+- remote_api: on
+
 handlers:
 
 - url: /stylesheets
@@ -10,26 +13,23 @@ handlers:
 
 - url: /images
   static_dir: images
+  
+- url: /js
+  static_dir: js
 
-- url: /db.*
-  script: admindb.py
+- url: /files/upload.html
+  script: files.py
+  login: required
 
-- url: /courses.*
-  script: courses.py
+- url: /files/upload
+  script: files.py
+  login: required
 
-- url: /resources.*
-  script: resources.py
+- url: /files/.*
+  script: files.py
 
-- url: /signup.*
-  script: signup.py
-
-- url: /upload.*
-  script: upload.py
-
-- url: /resources.*
+- url: /resource/.*
   script: resource.py
 
 - url: /.*
   script: taskbook.py
-
-
