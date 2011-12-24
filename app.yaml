@@ -8,17 +8,19 @@ builtins:
 
 handlers:
 
+
+
 - url: /stylesheets
   static_dir: stylesheets
+
+- url: /signup.*
+  script: signup.py
 
 - url: /images
   static_dir: images
   
 - url: /js
   static_dir: js
-
-- url: /signup.*
-  script: signup.py
 
 - url: /you.*
   script: you.py

@@ -117,7 +117,7 @@
 						<div class="contactform">
 							<fieldset>
 							<legend>Fill the form</legend>
-							<form method="post" action="signup/newUser"> 
+							<form method="post" action="/signup/newUser"> 
                 <p><label for="contact_firstname_1" class="left">Name:</label>
                    <input type="text" name="name" id="name" class="field" value="" tabindex="1" /></p>
                 <p><label for="contact_familyname_1" class="left">Student ID:</label>
@@ -133,7 +133,7 @@
 						<option value="{{ college.key.id }}">{{ college.col_name }}</option>
 						{% endfor %}
 						</select></p>
-						<p><input type="submit" class="button" value="SUBMIT"  /></p>
+						<p><input type="submit" class="button" value="SUBMIT"/></p>
 						</form>
               </fieldset>
 						</div>

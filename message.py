@@ -6,8 +6,10 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 class MainPage(webapp.RequestHandler):
     def get(self):
-        
-        template_values = {}
+        title='title'
+        message='message'
+        template_values = {'title': title,
+                           'message': message}
 
         path = os.path.join(os.path.dirname(__file__), 'html/message.html')
         self.response.out.write(template.render(path, template_values))

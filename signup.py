@@ -11,9 +11,21 @@ class MainPage(webapp.RequestHandler):
 
         path = os.path.join(os.path.dirname(__file__), 'html/signup.html')
         self.response.out.write(template.render(path, template_values))
+        
+class NewUser(webapp.RequestHandler):
+    def get(self):
+        title='title'
+        message='message'
+        template_values = {'title': title,
+                           'message': message}
+        
+        path = os.path.join(os.path.dirname(__file__), 'html/message.html')
+        self.response.out.write(template.render(path, template_values)) 
+                
 
  
-application = webapp.WSGIApplication([('/signup', MainPage)],
+application = webapp.WSGIApplication([('/signup', MainPage),
+                                      ('/signup/newUser', NewUser)],
                                      debug=True)
 
 def main():
