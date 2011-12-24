@@ -116,29 +116,40 @@
 					 <h1 class="contact">Sign Up</h1>
 						<div class="contactform">
 							<fieldset>
-										<legend>Fill the form</legend>
-										<p>
-											<label for="college" class="left">College: </label>
-											<select name="college" id="college" class="combo" onChange="dropdown(dep_names, document.getElementById('college').value, dep_colleges);">
-												<option value="choose"> Select... </option>
-												{% for college in colleges %}
-												<option value="{{ college.col_name }}">{{ college.col_name }}</option>
-												{% endfor %}
-											</select>
-										</p>
-										<p>
-											<label for="department" class="left">Department: </label>
-											<select name="department" id="department" class="combo">
-												<option value="choose"> Select... </option>
-											</select>
-										</p>
-										<p>
-											<label for="course" class="left">Course Name: </label>
-											<select name="course" id="course" class="combo">
-												<option value="choose"> Select... </option>
-											</select>
-										</p>
-								</fieldset>
+							<legend>Fill the form</legend>
+										                <p><label for="contact_title_1" class="left">Title:</label>
+                   <select name="contact_title" id="contact_title_1" class="combo">
+                     <option value="choose"> Select... </option>
+                     <option value="mrs"> Mrs. </option>
+                     <option value="mr"> Mr. </option>
+
+                     <option value="dr"> Dr. </option></select></p>
+                <p><label for="contact_firstname_1" class="left">First name:</label>
+                   <input type="text" name="contact_firstname" id="contact_firstname_1" class="field" value="" tabindex="1" /></p>
+                <p><label for="contact_familyname_1" class="left">Family name:</label>
+                   <input type="text" name="contact_familyname" id="contact_familyname_1" class="field" value="" tabindex="1" /></p>
+                <p><label for="contact_street_1" class="left">Street:</label>
+
+                   <input type="text" name="contact_street" id="contact_street_1" class="field" value="" tabindex="1" /></p>
+                <p><label for="contact_postalcode_1" class="left">Postal code:</label>
+                   <input type="text" name="contact_postalcode" id="contact_postalcode_1" class="field" value="" tabindex="1" /></p>
+                <p><label for="contact_city_1" class="left">City:</label>
+                   <input type="text" name="contact_city" id="contact_city_1" class="field" value="" tabindex="1" /></p>
+                <p><label for="contact_country_1" class="left">Country:</label>
+                   <select name="contact_country" id="contact_country_1" class="combo">
+
+                     <option value="choose"> Select... </option>
+                     <option value="Sweden"> Sweden </option>
+                     <option value="United States"> United States </option>
+                     <option value="China"> China </option></select></p>
+                <p><label for="contact_phone_1" class="left">Phone:</label>
+
+                   <input type="text" name="contact_phone" id="contact_phone_1" class="field" value="" tabindex="2" /></p>
+                <p><label for="contact_email_1" class="left">Email:</label>
+                   <input type="text" name="contact_email" id="contact_email_1" class="field" value="" tabindex="2" /></p>
+                <p><label for="contact_url_1" class="left">Website:</label>
+                   <input type="text" name="contact_url" id="contact_url_1" class="field" value="" tabindex="3" /></p>
+              </fieldset>
 						</div>
 					</div>
 					<div class="corner-content-1col-bottom"></div>

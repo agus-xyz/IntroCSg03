@@ -46,8 +46,7 @@ class MainPage(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
 
         
-application = webapp.WSGIApplication(
-                                     [('/', MainPage)],
+application = webapp.WSGIApplication([('/', MainPage)],
                                      debug=True)
 
 def main():

@@ -116,36 +116,20 @@
 					 <h1 class="contact">You</h1>
 						<div class="contactform">
 							<fieldset>
-										<legend>Select your course</legend>
-										<p>
-											<label for="college" class="left">College: </label>
-											<select name="college" id="college" class="combo" onChange="dropdown(dep_names, document.getElementById('college').value, dep_colleges);">
-												<option value="choose"> Select... </option>
-												{% for college in colleges %}
-												<option value="{{ college.col_name }}">{{ college.col_name }}</option>
-												{% endfor %}
-											</select>
-										</p>
-										<p>
-											<label for="department" class="left">Department: </label>
-											<select name="department" id="department" class="combo">
-												<option value="choose"> Select... </option>
-											</select>
-										</p>
-										<p>
-											<label for="course" class="left">Course Name: </label>
-											<select name="course" id="course" class="combo">
-												<option value="choose"> Select... </option>
-											</select>
-										</p>
-								</fieldset>
-								<fieldset><legend>Resources</legend>
-									<table>
-            							<tr><th class="top" scope="col">Title</th><th class="top" scope="col">Author</th><th class="top" scope="col">Date</th><th class="top" scope="col">Description</th></tr>
-            							<tr><td><a href="#">Title 1</a><td><a href="#">Author 1</a></td><td>Date 1</td><td>Description 1</td></tr>
-           								<tr><td><a href="#">Title 2</a></td><td><a href="#">Author 2</a></td><td>Date 2</td><td>Description 2</td></tr>
-         							 </table>
-                				</fieldset>
+								<legend>Personal information</legend>
+								<form method="post" action="index.html"> 
+              <p><input type="hidden" name="rememberme" value="0" /></p>
+                  <p><label for="username_1" class="top">User:</label><br />
+                  <input type="text" name="username_1" id="username_1" tabindex="1" class="field" value="" /></p>
+
+              <p><label for="password_1" class="top">Password:</label><br />
+                  <input type="password" name="password_1" id="password_1" tabindex="2" class="field" value="" /></p>
+              <p><input type="submit" name="cmdweblogin" class="button" value="LOGIN"  /></p>
+              <p><a href="#" id="forgotpsswd_1">Password forgotten?</a></p>
+         
+            </form>
+										
+							</fieldset>
 						</div>
 					</div>
 					<div class="corner-content-1col-bottom"></div>
