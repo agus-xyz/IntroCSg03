@@ -6,6 +6,14 @@ from google.appengine.ext import db
 
 class College(db.Model):
     col_name = db.StringProperty(required=True)
+    
+class User(db.Model):
+    name = db.StringProperty(required=True)
+    password = db.StringProperty(required=True)
+    email = db.StringProperty(required=True)
+    studentid = db.StringProperty(required=True)
+    college = db.ReferenceProperty(College, required=True)
+    admin = db.BooleanProperty(required=True)
 
 class Department(db.Model):
     dep_name = db.StringProperty(required=True)
@@ -38,9 +46,7 @@ class Comment(db.Model):
 class MainPage(webapp.RequestHandler):
     def get(self):
         colleges = College.all()
-        template_values = {
-            'colleges':colleges,
-            }
+        template_values = {'colleges':colleges}
 
         path = os.path.join(os.path.dirname(__file__), 'html/index.html')
         self.response.out.write(template.render(path, template_values))
