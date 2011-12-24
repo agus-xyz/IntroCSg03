@@ -1,5 +1,5 @@
 application: ntuintrocsg03
-version: 1
+version: agus
 runtime: python
 api_version: 1
 
@@ -17,6 +17,15 @@ handlers:
 - url: /js
   static_dir: js
 
+- url: /signup.*
+  script: signup.py
+
+- url: /you.*
+  script: you.py
+
+- url: /search.*
+  script: search.py
+
 - url: /files/upload.html
   script: files.py
   login: required
@@ -32,8 +41,5 @@ handlers:
   script: resource.py
 
 - url: /.*
-<<<<<<< HEAD
   script: taskbook.py
-=======
-  script: taskbook.py
->>>>>>> master
+

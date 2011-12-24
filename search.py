@@ -7,14 +7,13 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 class MainPage(webapp.RequestHandler):
     def get(self):
         
-        template_values = {
-            }
+        template_values = {}
 
-        path = os.path.join(os.path.dirname(__file__), 'html/signup.html')
+        path = os.path.join(os.path.dirname(__file__), 'html/search.html')
         self.response.out.write(template.render(path, template_values))
 
  
-application = webapp.WSGIApplication([('/signup', MainPage)],
+application = webapp.WSGIApplication([('/search', MainPage)],
                                      debug=True)
 
 def main():

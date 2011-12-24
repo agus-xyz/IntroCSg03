@@ -80,7 +80,7 @@
 .content ol.indent {padding:0 20px 0 70px !important /*Non-IE6*/; padding:0 20px 0 80px /*IE6*/;}
 
 /* TABLE(1-Column / 2-Column / 3-Column)*/
-.content table {clear:both; width:920px; margin:2.0em 0 0.2em 20px; table-layout:fixed; border-collapse:collapse; empty-cells:show; background-color:rgb(233,232,244);}
+.content table {clear:both; width:870px; margin:2.0em 0 0.2em 20px; table-layout:fixed; border-collapse:collapse; empty-cells:show; background-color:rgb(233,232,244);}
 .content-2col-nobox-leftcolumn table, .content-2col-nobox-rightcolumn table, .content-2col-box-leftcolumn table, .content-2col-box-rightcolumn table {clear:both; width:440px; margin:2.0em 0 0.2em 20px; table-layout:fixed; border-collapse:collapse; empty-cells:show; background-color:rgb(233,232,244);}
 .content-3col-nobox-leftcolumn table, .content-3col-nobox-middlecolumn table, .content-3col-nobox-rightcolumn table, .content-3col-box-leftcolumn table, .content-3col-box-middlecolumn table, .content-3col-box-rightcolumn table {clear:both; width:280px; margin:2.0em 0 0.2em 20px; table-layout:fixed; border-collapse:collapse; empty-cells:show; background-color:rgb(233,232,244);}
 

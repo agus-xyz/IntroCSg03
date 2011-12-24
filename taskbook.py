@@ -1,79 +1,53 @@
 import os
 from google.appengine.ext.webapp import template
-from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
 
- 
-class Greeting(db.Model):
-    author = db.UserProperty()
-    content = db.StringProperty(multiline=True)
-    date = db.DateTimeProperty(auto_now_add=True)
-
 class College(db.Model):
-    col_name = db.StringProperty()
+    col_name = db.StringProperty(required=True)
+
+class Department(db.Model):
+    dep_name = db.StringProperty(required=True)
+    dep_college = db.ReferenceProperty(College, required=True)
 
 class Course(db.Model):
     cour_name = db.StringProperty(required=True)
-    cour_college = db.IntegerProperty(required=True)
+    cour_department = db.ReferenceProperty(Department, required=True)
     cour_professor = db.StringProperty(required=True)
-      
 
+class Resource(db.Model):
+    res_filekey = db.BlobProperty(required=True)
+    res_author = db.UserProperty(required=True)
+    res_title = db.StringProperty(required=True, multiline=False)
+    res_add_date = db.DateTimeProperty(required=True, auto_now_add=True)
+    res_college = db.ReferenceProperty(College, required=True)
+    res_course_ = db.ReferenceProperty(Course, required=True)
+    res_short_uri = db.LinkProperty(required=True)
+        
+class Comment(db.Model):
+    co_text = db.TextProperty()
+    co_user = db.UserProperty(required=True)
+    co_content = db.StringProperty(required=True, multiline=True)
+    co_upvotes = db.IntegerProperty(required=True)
+    co_downvotes = db.IntegerProperty(required=True)
+    co_title = db.StringProperty(required=True, multiline=False)
+    co_resource = db.ReferenceProperty(Resource, required=True)
+    co_add_date = db.DateTimeProperty(required=True, auto_now_add=True)
+    
 class MainPage(webapp.RequestHandler):
     def get(self):
         colleges = College.all()
-        
-        if users.get_current_user():
-            url = users.create_logout_url(self.request.uri)
-            url_linktext = 'Logout'
-        else:
-            url = users.create_login_url(self.request.uri)
-            url_linktext = 'Login'
-
         template_values = {
-            'url': url,
-            'url_linktext': url_linktext,
             'colleges':colleges,
             }
 
         path = os.path.join(os.path.dirname(__file__), 'html/index.html')
         self.response.out.write(template.render(path, template_values))
 
-
-class AdminDB(webapp.RequestHandler):
-    def post(self):
-        template_values = {}
-        path = os.path.join(os.path.dirname(__file__), 'html/admindb.html')
-        self.response.out.write(template.render(path, template_values))
-
-class NewCollege(webapp.RequestHandler):
-    def post(self):
-        #college = College()
-        #college.name = self.request.get('name')
-        #college.put()
-        greeting = ""
-    
         
-class Guestbook(webapp.RequestHandler):
-    def post(self):
-        greeting = Greeting()
-        #college = College()
-        #college.name = self.request.get('content')
-        #college.put();
-        
-        if users.get_current_user():
-            greeting.author = users.get_current_user()
-
-        greeting.content = self.request.get('content')
-        greeting.put()
-        self.redirect('/')
-
 application = webapp.WSGIApplication(
-                                     [('/', MainPage),
-                                      ('/sign', Guestbook),
-                                      ('/admindb',AdminDB),
-                                      ('/newCollege',NewCollege)],
+                                     [('/', MainPage)],
                                      debug=True)
 
 def main():
