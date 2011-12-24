@@ -1,5 +1,5 @@
 application: ntuintrocsg03
-version: agus
+version: 1
 runtime: python
 api_version: 1
 
@@ -32,4 +32,8 @@ handlers:
   script: resource.py
 
 - url: /.*
+<<<<<<< HEAD
   script: taskbook.py
+=======
+  script: taskbook.py
+>>>>>>> master
