@@ -19,25 +19,40 @@
 	  <script type="text/javascript" src="/js/jquery.js"></script>
 	  <script type="text/javascript">
 	  <!--
-	  var dep_names = {{ departments }};
-	  var dep_colleges = {{ dep_colleges }};
-	  function dropdown(haystack, filter, colleges)
-		{
-		target = document.getElementById("department");
-		var haystack_amt = haystack.length;
-		var i = 0;
-		var j = 0;
-		target.options.length = 0;
-		for(i=0, j=0; i<haystack_amt; i++)
-			{
-			if(colleges[i]==filter)
-				{
-				option = new Option(haystack[i],haystack[i]);
-				target.options[j] = option;
-				j+=1;
+		var departments_name = {{ departments_name }};
+		var departments_id = {{ departments_id }};
+		var departments_college = {{ departments_college }};
+		function dropdowndepartments(filter){
+			target = document.getElementById("department");
+			target.options.length = 1;
+			var opt = 1;
+			for(var dep=0; dep<departments_name.length; dep++){
+				if(departments_college[dep]==filter){
+					option = new Option(departments_name[dep],departments_id[dep]);
+					target.options[opt] = option;
+					opt++;
 				}
 			}
 		}
+		
+		var courses_name = {{ courses_name }};
+		var courses_id = {{ courses_id }};
+		var courses_department = {{ courses_department }};
+		function dropdowncourses(filter){
+			target = document.getElementById("course");
+			target.options.length = 1;
+			var opt = 1;
+			for(var cour=0; cour<courses_name.length; cour++){
+				if(courses_department[cour]==filter){
+					option = new Option(courses_name[cour],courses_id[cour]);
+					target.options[opt] = option;
+					opt++;
+				}
+			}
+		}
+		
+		
+		
 	  //-->
 	  </script>
 	  <title>Taskbook</title>
@@ -115,19 +130,20 @@
 					 <h1 class="contact">Home</h1>
 						<div class="contactform">
 							<fieldset>
-										<legend>Select your course</legend>
+										<legend>Select a course</legend>
+										<form method="post" action="/getResources"> 
 										<p>
 											<label for="college" class="left">College: </label>
-											<select name="college" id="college" class="combo" onChange="dropdown(dep_names, document.getElementById('college').value, dep_colleges);">
+											<select name="college" id="college" class="combo" onChange="dropdowndepartments(document.getElementById('college').value);">
 												<option value="choose"> Select... </option>
 												{% for college in colleges %}
-												<option value="{{ college.col_name }}">{{ college.col_name }}</option>
+												<option value="{{ college.key.id }}">{{ college.col_name }}</option>
 												{% endfor %}
 											</select>
 										</p>
 										<p>
 											<label for="department" class="left">Department: </label>
-											<select name="department" id="department" class="combo">
+											<select name="department" id="department" class="combo" onChange="dropdowncourses(document.getElementById('department').value);">
 												<option value="choose"> Select... </option>
 											</select>
 										</p>
@@ -137,14 +153,9 @@
 												<option value="choose"> Select... </option>
 											</select>
 										</p>
+										<p><input type="submit" class="button" value="Get Resources"/></p>
+						</form>
 								</fieldset>
-								<fieldset><legend>Resources</legend>
-									<table>
-            							<tr><th class="top" scope="col">Title</th><th class="top" scope="col">Author</th><th class="top" scope="col">Date</th><th class="top" scope="col">Description</th></tr>
-            							<tr><td><a href="#">Title 1</a><td><a href="#">Author 1</a></td><td>Date 1</td><td>Description 1</td></tr>
-           								<tr><td><a href="#">Title 2</a></td><td><a href="#">Author 2</a></td><td>Date 2</td><td>Description 2</td></tr>
-         							 </table>
-                				</fieldset>
 						</div>
 					</div>
 					<div class="corner-content-1col-bottom"></div>

@@ -3,6 +3,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
+from django.utils import simplejson
 
 class College(db.Model):
     col_name = db.StringProperty(required=True)
@@ -46,9 +47,37 @@ class Comment(db.Model):
 class MainPage(webapp.RequestHandler):
     def get(self):
         colleges = College.all()
-        template_values = {'colleges':colleges}
+        departments = Department.all()
+        courses = Course.all()
+        
+        dep_name = []
+        dep_id = []
+        dep_college = []
+        
+        cour_name = []
+        cour_id = []
+        cour_department = []
+        
+        for department in departments:
+            dep_name.append(department.dep_name)
+            dep_id.append(department.key().id())
+            dep_college.append(department.dep_college.key().id())
+            
+        for course in courses:
+            cour_name.append(course.cour_name)
+            cour_id.append(course.key().id())
+            cour_department.append(course.cour_department.key().id())    
+        
+        template_values = { 'colleges': colleges,
+                            'departments_name' : simplejson.dumps(dep_name),
+                            'departments_id' : simplejson.dumps(dep_id),
+                            'departments_college' : simplejson.dumps(dep_college), 
+                            'courses_name' : simplejson.dumps(cour_name),
+                            'courses_id' : simplejson.dumps(cour_id),
+                            'courses_department' :  simplejson.dumps(cour_department)
+                            }
 
-        path = os.path.join(os.path.dirname(__file__), 'html/index.html')
+        path = os.path.join(os.path.dirname(__file__), 'html/taskbook.html')
         self.response.out.write(template.render(path, template_values))
 
                 
