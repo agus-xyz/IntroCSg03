@@ -17,29 +17,6 @@
 	  <link rel="stylesheet" type="text/css" media="screen,projection,print" href="/stylesheets/mf54_content_nosidebar.css" />
 	  <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
 	  <script type="text/javascript" src="/js/jquery.js"></script>
-	  <script type="text/javascript">
-	  <!--
-	  var dep_names = {{ departments }};
-	  var dep_colleges = {{ dep_colleges }};
-	  function dropdown(haystack, filter, colleges)
-		{
-		target = document.getElementById("department");
-		var haystack_amt = haystack.length;
-		var i = 0;
-		var j = 0;
-		target.options.length = 0;
-		for(i=0, j=0; i<haystack_amt; i++)
-			{
-			if(colleges[i]==filter)
-				{
-				option = new Option(haystack[i],haystack[i]);
-				target.options[j] = option;
-				j+=1;
-				}
-			}
-		}
-	  //-->
-	  </script>
 	  <title>Taskbook</title>
 	</head>
 	<!-- Global IE fix to avoid layout crash when single word size wider than column width -->
@@ -54,7 +31,7 @@
 			<div class="header">
 				<div class="header-top">
 					<!-- A.1 SITENAME -->      
-					<a class="sitelogo" href="index.html" title="Home"></a>
+					<a class="sitelogo" href="/" title="Home"></a>
 					<div class="sitename">
 					</div>
 					<!-- A.2 BUTTON NAVIGATION -->
@@ -75,7 +52,7 @@
 					<ul>
 					  <li class="nobullet">You are here:&nbsp;</li>
 					  <li><a href="/">Home</a></li>
-					  <li><a href="/">Sign Up</a></li>
+					  <li><a href="/signup">Sign Up</a></li>
 					</ul>
 				</div>
 			</div>
@@ -123,7 +100,7 @@
                 <p><label for="contact_familyname_1" class="left">Student ID:</label>
                    <input type="text" name="studentid" id="studentid" class="field" value="" tabindex="1" /></p>
                 <p><label for="contact_street_1" class="left">Password:</label>
-                   <input type="text" name="password" id="password" class="field" type="password" value="" tabindex="1" /></p>
+                   <input type="password" name="password" id="password" class="field" value="" tabindex="1" /></p>
                 <p><label for="contact_postalcode_1" class="left">Email:</label>
                    <input type="text" name="email" id="email" class="field" value="" tabindex="1" /></p>
                 <p><label for="contact_city_1" class="left">College:</label>

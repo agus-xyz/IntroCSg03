@@ -8,8 +8,6 @@ builtins:
 
 handlers:
 
-
-
 - url: /stylesheets
   static_dir: stylesheets
 
@@ -27,6 +25,9 @@ handlers:
 
 - url: /search.*
   script: search.py
+
+- url: /message.*
+  script: message.py
 
 - url: /files/upload.html
   script: files.py
