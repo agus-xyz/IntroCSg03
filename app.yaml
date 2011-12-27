@@ -8,6 +8,9 @@ builtins:
 
 handlers:
 
+- url: /test/.*
+  script: test.py
+
 - url: /stylesheets
   static_dir: stylesheets
 
@@ -17,6 +20,12 @@ handlers:
 - url: /js
   static_dir: js
 
+- url: /me
+  static_dir: me
+  
+- url: /guestbook/.*
+  script: guestbook.py
+  
 - url: /files/upload.html
   script: files.py
   login: required

@@ -3,7 +3,9 @@
 import os
 import urllib
 import sys
+import models
 
+from google.appengine.api import users
 from google.appengine.ext import blobstore
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import blobstore_handlers
@@ -12,37 +14,6 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
 from django.utils import simplejson
 from apis import bitly
-
-class College(db.Model):
-    col_name = db.StringProperty(required=True)
-
-class Department(db.Model):
-    dep_name = db.StringProperty(required=True)
-    dep_college = db.ReferenceProperty(College, required=True)
-
-class Course(db.Model):
-    cour_name = db.StringProperty(required=True)
-    cour_department = db.ReferenceProperty(Department, required=True)
-    cour_professor = db.StringProperty(required=True)
-
-class Resource(db.Model):
-    res_filekey = db.BlobProperty(required=True)
-    res_author = db.UserProperty(required=True)
-    res_title = db.StringProperty(required=True, multiline=False)
-    res_add_date = db.DateTimeProperty(required=True, auto_now_add=True)
-    res_college = db.ReferenceProperty(College, required=True)
-    res_course_ = db.ReferenceProperty(Course, required=True)
-    res_short_uri = db.LinkProperty(required=True)
-        
-class Comment(db.Model):
-    co_text = db.TextProperty()
-    co_user = db.UserProperty(required=True)
-    co_content = db.StringProperty(required=True, multiline=True)
-    co_upvotes = db.IntegerProperty(required=True)
-    co_downvotes = db.IntegerProperty(required=True)
-    co_title = db.StringProperty(required=True, multiline=False)
-    co_resource = db.ReferenceProperty(Resource, required=True)
-    co_add_date = db.DateTimeProperty(required=True, auto_now_add=True)
 
 class TestHandler(webapp.RequestHandler):
     def get(self):
@@ -65,9 +36,25 @@ class TestHandler(webapp.RequestHandler):
 class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
     def post(self):
         upload_files = self.get_uploads('file')  # 'file' is file upload field in the form
+        title = self.request.get('title')
+        college = self.request.get('college')
+        department = self.request.get('department')
+        dep = db.GqlQuery("SELECT * FROM Department WHERE dep_name = :dep_name", dep_name=department)
+        dep.run()
         blob_info = upload_files[0]
         if blob_info:
-            
+            bly = bitly.BitLy('o_2tov7hc8mi', 'R_e863d338484e0fbb60cf1416ce3ae6de')
+            uri = str(os.environ.get('SERVER_NAME'))
+            uri = uri + '/resource/' + str(blob_info.key())
+            short = bly.shorten(uri)
+            uri2 = 'http://%s' % uri
+            short = short['results'][uri2]['shortUrl']
+            if short:
+                pass
+            else:
+                short = 'uri2'
+            resource = models.Resource(res_title=title, res_filekey=str(blob_info.key()), res_dep=dep[0], res_filekey2=str(blob_info.key()), res_short_uri=short)
+            resource.put()
             self.redirect('/resource/%s' % str(blob_info.key()))
         else:
             self.error(404)
