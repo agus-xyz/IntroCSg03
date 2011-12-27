@@ -87,7 +87,7 @@
 					<ul>
 					  <li class="nobullet">You are here:&nbsp;</li>
 					  <li><a href="/">Home</a></li>
-					  <li><a href="#">{{course}}</a></li>
+					  <li><a href="#">{{course.cour_name}}</a></li>
 					</ul>
 				</div>
 			</div>
@@ -101,7 +101,7 @@
 				</ul>               
 				<!-- Navigation item -->
 				<ul>
-					<li><a href="/files/upload.html">Upload Files</a></li>
+					<li><a href="/upload">Upload Files</a></li>
 				</ul>
 				<!-- Navigation item -->           
 				<ul>
@@ -125,10 +125,10 @@
 					<a id="anchor-table-1"></a>
         			<div class="corner-content-1col-top"></div>                        
         			<div class="content-1col-nobox">
-					 <h1 class="contact">{{ Course }}</h1>
+					 <h1 class="contact">{{ course.cour_name }}</h1>
 						<div class="contactform">
 							<fieldset>
-								<fieldset><legend>Resources</legend>
+									<legend>Resources</legend>
 									<table>
             							<tr><th class="top" scope="col">Title</th><th class="top" scope="col">Author</th><th class="top" scope="col">Date</th><th class="top" scope="col">Description</th></tr>
             							<tr><td><a href="#">Title 1</a><td><a href="#">Author 1</a></td><td>Date 1</td><td>Description 1</td></tr>

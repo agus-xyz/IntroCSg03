@@ -1,5 +1,5 @@
 application: ntuintrocsg03
-version: 1
+version: agus
 runtime: python
 api_version: 1
 
@@ -10,9 +10,6 @@ handlers:
 
 - url: /stylesheets
   static_dir: stylesheets
-
-- url: /signup.*
-  script: signup.py
 
 - url: /images
   static_dir: images
@@ -29,16 +26,14 @@ handlers:
 - url: /message.*
   script: message.py
 
-- url: /files/upload.html
+- url: /upload.*
   script: files.py
-  login: required
-
-- url: /files/upload
-  script: files.py
-  login: required
 
 - url: /files/.*
   script: files.py
+
+- url: /signup.*
+  script: signup.py
 
 - url: /resource/.*
   script: resource.py
