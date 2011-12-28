@@ -57,9 +57,9 @@
 /*******************/
 
 /* BREADCRUMB */
-.header-bottom ul {float:left; width:430px; list-style:none; padding:8px 0 3px 10px !important /*Non-IE6*/; padding:8px 0 3px 10px /*IE6*/;}
+.header-bottom ul {float:left; width:800px; list-style:none; padding:8px 0 3px 10px !important /*Non-IE6*/; padding:8px 0 3px 10px /*IE6*/;}
 .header-bottom ul li {display:inline; padding:0 0 0 10px; background:transparent url(/images/bg_bullet_arrow.gif) no-repeat 0 50%; font-size:110% !important /*Non-IE6*/; font-size:100% /*IE6*/;}
-.header-bottom ul li.nobullet {display:inline; padding:0; background:none; color:rgb(75,75,75);}
+.header-bottom ul li.nobullet {width:800px; display:inline; padding:0; background:none; color:rgb(75,75,75);}
 .header-bottom ul a {color:rgb(125,125,125); font-weight:bold; text-decoration:none;}
 .header-bottom ul a:hover {color:rgb(255,255,255);}
 

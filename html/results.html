@@ -17,41 +17,6 @@
 	  <link rel="stylesheet" type="text/css" media="screen,projection,print" href="/stylesheets/mf54_content_nosidebar.css" />
 	  <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
 	  <script type="text/javascript" src="/js/jquery.js"></script>
-	  <script type="text/javascript">
-	  <!--
-		var departments_name = {{ departments_name }};
-		var departments_id = {{ departments_id }};
-		var departments_college = {{ departments_college }};
-		function dropdowndepartments(filter){
-			target = document.getElementById("department");
-			target.options.length = 1;
-			var opt = 1;
-			for(var dep=0; dep<departments_name.length; dep++){
-				if(departments_college[dep]==filter){
-					option = new Option(departments_name[dep],departments_id[dep]);
-					target.options[opt] = option;
-					opt++;
-				}
-			}
-		}
-		
-		var courses_name = {{ courses_name }};
-		var courses_id = {{ courses_id }};
-		var courses_department = {{ courses_department }};
-		function dropdowncourses(filter){
-			target = document.getElementById("course");
-			target.options.length = 1;
-			var opt = 1;
-			for(var cour=0; cour<courses_name.length; cour++){
-				if(courses_department[cour]==filter){
-					option = new Option(courses_name[cour],courses_id[cour]);
-					target.options[opt] = option;
-					opt++;
-				}
-			}
-		}
-	  //-->
-	  </script>
 	  <title>Taskbook</title>
 	</head>
 	<!-- Global IE fix to avoid layout crash when single word size wider than column width -->
@@ -87,6 +52,8 @@
 					<ul>
 					  <li class="nobullet">You are here:&nbsp;</li>
 					  <li><a href="/">Home</a></li>
+         			  <li><a href="#">{{course.cour_department.dep_college.col_name|truncatewords:4}}</a></li>
+          			  <li><a href="#">{{course.cour_department.dep_name|truncatewords:4}}</a></li>
 					  <li><a href="#">{{course.cour_name}}</a></li>
 					</ul>
 				</div>
@@ -118,7 +85,6 @@
 			</div>    
 			<!-- C. MAIN SECTION -->      
 			<div class="main">
-				
 				<!-- C.1 CONTENT -->
 				<div class="content">
 					<!-- CONTENT CELL -->                
@@ -130,11 +96,12 @@
 							<fieldset>
 									<legend>Resources</legend>
 									<table>
-            							<tr><th class="top" scope="col">Title</th><th class="top" scope="col">Author</th><th class="top" scope="col">Date</th><th class="top" scope="col">Description</th></tr>
-            							<tr><td><a href="#">Title 1</a><td><a href="#">Author 1</a></td><td>Date 1</td><td>Description 1</td></tr>
-           								<tr><td><a href="#">Title 2</a></td><td><a href="#">Author 2</a></td><td>Date 2</td><td>Description 2</td></tr>
+										<tr><th class="top" scope="col">Title</th><th class="top" scope="col">Author</th><th class="top" scope="col">Date</th></tr>
+										{% for r in resources %}
+            							<tr><td><a href="/resource/{{r.res_filekey2}}">{{r.res_title}}</a><td><a href="#">{{r.res_author.name}}</a></td><td>{{r.res_add_date|date:"d.m.Y"}}</td></tr>
+         							 	{% endfor %}
          							 </table>
-                				</fieldset>
+                			</fieldset>
 						</div>
 					</div>
 					<div class="corner-content-1col-bottom"></div>

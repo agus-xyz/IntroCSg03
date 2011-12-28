@@ -16,14 +16,12 @@ class MainPage(webapp.RequestHandler):
             self.error(404)
         if blob_instance:
             content_type = blob_instance.content_type
-            filename = blob_instance.filename
             query = db.GqlQuery("SELECT * FROM Resource WHERE res_filekey2=:1", str(resource))
-            resource = ''.join([self.request.host_url, '/resource/loader/', resource])
+            download_link = ''.join([self.request.host_url, '/resource/loader/', resource])
             template_values = {
-            'filename': filename,
-            'resource': resource,
-            'type': content_type,
-            'short': query[0].res_short_uri,
+            'resource' : query[0],                   
+            'download_link': download_link,
+            'type': content_type
             }
             path = os.path.join(os.path.dirname(__file__), 'html/resource.html')
             self.response.out.write(template.render(path, template_values))

@@ -1,5 +1,5 @@
 application: ntuintrocsg03
-version: 1
+version: agus
 runtime: python
 api_version: 1
 
@@ -32,8 +32,11 @@ handlers:
 - url: /signup.*
   script: signup.py
 
-- url: /resource/.*
+- url: /resource.*
   script: resource.py
+
+- url: /loaddb.*
+  script: loaddb.py
 
 - url: /.*
   script: taskbook.py

@@ -50,12 +50,14 @@ class GetResources(webapp.RequestHandler):
         resources = Resource.all()
         course = Course.get_by_id(int(self.request.get('course')))
         selected_resources = []
-        for resource in resources:
-            if resource.res_course == course:
-                selected_resources.append(resource)
-       
+        
+        for r in resources:
+            if r.res_course.key().id() == course.key().id():
+                selected_resources.append(r)
+        
         template_values = {'course' : course,
-                        'resources' : selected_resources}      
+                           'resources' : selected_resources
+                           }      
         path = os.path.join(os.path.dirname(__file__), 'html/results.html')
         self.response.out.write(template.render(path, template_values))
         

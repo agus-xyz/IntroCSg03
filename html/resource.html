@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" media="screen,projection,print" href="/stylesheets/mf54_grid_nosidebar.css" />
   <link rel="stylesheet" type="text/css" media="screen,projection,print" href="/stylesheets/mf54_content_nosidebar.css" />
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
-  <title>Resource Name</title>
+  <title>Taskbook</title>
 </head>
 
 <!-- Global IE fix to avoid layout crash when single word size wider than column width -->
@@ -58,8 +58,10 @@
         <ul>
           <li class="nobullet">You are here:&nbsp;</li>
           <li><a href="/">Home</a></li>
-          <li><a href="#">Resources</a></li>
-          <li><a href="#">{{filename}}</a></li>
+          <li><a href="#">{{resource.res_course.cour_department.dep_college.col_name|truncatewords:4}}</a></li>
+          <li><a href="#">{{resource.res_course.cour_department.dep_name|truncatewords:4}}</a></li>
+          <li><a href="#">{{resource.res_course.cour_name|truncatewords:4}}</a></li>
+          <li><a href="#">{{resource.res_title}}</a></li>
         </ul>
 
       </div>
@@ -100,15 +102,36 @@
         <a id="anchor-video-1"></a>
         <div class="corner-content-1col-top"></div>
         <div class="content-1col-nobox">
-          <h1 class="video">{{filename}}</h1>
+          <h1 class="video">{{resource.res_title}}</h1>
           <div class="videoplayer">
-			<object type="text/html" data="http://docs.google.com/viewer?url={{resource}}&amp;embedded=true" width="908" height="532"></object>
+			<object type="text/html" data="http://docs.google.com/viewer?url={{download_link}}&amp;embedded=true" width="908" height="532"></object>
           </div>
           <div class="contactform">
 			<fieldset>
 				<legend>Resource Info</legend>
-						<p><h5>Download Link: <a href="{{ resource }}">Download</a></h5>
-						<h5>Short Download Link: <a href="{{ short }}">{{ short }}</a></h5>
+						<p>
+							<label class="left">Title: </label>
+							<label>{{resource.res_title}}</label>
+						</p>
+						<p>
+							<label class="left">Course: </label>
+							<label>{{resource.res_course.cour_name}}</label>
+						</p>
+						<p>
+							<label class="left">Author: </label>
+							<label>{{resource.res_author.name}}</label>
+						</p>
+						<p>
+							<label class="left">Date: </label>
+							<label>{{resource.res_add_date|date:"d.m.Y"}}</label>	
+						</p>
+						<p>
+							<label class="left">Short Link: </label>
+							<label><a href="{{resource.res_short_uri}}">{{resource.res_short_uri}}</a></label>
+						</p>
+						<p>
+							<label class="left"><a href="{{download_link}}">Download</a></label>
+						</p>
 			</fieldset>
 			</div>
         </div>
