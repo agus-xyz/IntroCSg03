@@ -27,10 +27,7 @@ handlers:
   script: message.py
 
 - url: /upload.*
-  script: files.py
-
-- url: /files.*
-  script: files.py
+  script: upload.py
 
 - url: /signup.*
   script: signup.py

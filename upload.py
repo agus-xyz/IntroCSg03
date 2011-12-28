@@ -1,5 +1,4 @@
 import os
-import urllib
 from model import College
 from model import Resource
 from model import Department
@@ -36,8 +35,9 @@ class MainPage(webapp.RequestHandler):
             cour_name.append(course.cour_name)
             cour_id.append(course.key().id())
             cour_department.append(course.cour_department.key().id())    
+        
         upload_url = blobstore.create_upload_url('/upload/submit')
-       
+                
         template_values = { 'colleges': colleges,
                             'departments_name' : simplejson.dumps(dep_name),
                             'departments_id' : simplejson.dumps(dep_id),
@@ -46,8 +46,7 @@ class MainPage(webapp.RequestHandler):
                             'courses_id' : simplejson.dumps(cour_id),
                             'courses_department' :  simplejson.dumps(cour_department),
                             'action': upload_url
-                            }
-
+                            }    
         path = os.path.join(os.path.dirname(__file__), 'html/upload.html')
         self.response.out.write(template.render(path, template_values))
         
@@ -87,7 +86,7 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
                                     res_course=course, 
                                     res_filekey2=str(blob_info.key()),
                                     res_short_uri=short,
-                                    res_user = user)
+                                    res_author = user)
                 resource.put()
                 self.redirect('/resource/%s' % str(blob_info.key()))
             else:
@@ -96,12 +95,6 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
             self.redirect('/upload/wrong_user') 
         
 
-class ServeHandler(blobstore_handlers.BlobstoreDownloadHandler):
-    def get(self, resource):
-        resource = str(urllib.unquote(resource))
-        blob_info = blobstore.BlobInfo.get(resource)
-        self.send_blob(blob_info)
-        
 class WrongUser(webapp.RequestHandler):
     def get(self):
         title='Authentication error'
@@ -140,7 +133,6 @@ def main():
            ('/upload/submit', UploadHandler),
            ('/upload/wrong_user', WrongUser),
            ('/upload/wrong_file', WrongFile),
-           ('/files/serve/([^/]+)?', ServeHandler),
           ], debug=True)
     run_wsgi_app(application)
 

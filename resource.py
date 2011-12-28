@@ -1,6 +1,7 @@
 import os
 import urllib
 from google.appengine.ext import blobstore
+from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -17,7 +18,7 @@ class MainPage(webapp.RequestHandler):
             content_type = blob_instance.content_type
             filename = blob_instance.filename
             query = db.GqlQuery("SELECT * FROM Resource WHERE res_filekey2=:1", str(resource))
-            resource = ''.join([self.request.host_url, '/files/serve/', resource])
+            resource = ''.join([self.request.host_url, '/resource/loader/', resource])
             template_values = {
             'filename': filename,
             'resource': resource,
@@ -28,10 +29,17 @@ class MainPage(webapp.RequestHandler):
             self.response.out.write(template.render(path, template_values))
         else:
             self.error(404)
-        
+
+class ResourceLoader(blobstore_handlers.BlobstoreDownloadHandler):
+    def get(self, resource):
+        resource = str(urllib.unquote(resource))
+        blob_info = blobstore.BlobInfo.get(resource)
+        self.send_blob(blob_info)
+       
 def main():
     application = webapp.WSGIApplication(
           [('/resource/([^/]+)?', MainPage),
+           ('/resource/loader/([^/]+)?', ResourceLoader)
           ], debug=True)
     run_wsgi_app(application)
 
