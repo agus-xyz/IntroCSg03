@@ -139,7 +139,7 @@ def main():
           [('/upload', MainPage),
            ('/upload/submit', UploadHandler),
            ('/upload/wrong_user', WrongUser),
-           ('/upload/wrong_file', WrongFile)
+           ('/upload/wrong_file', WrongFile),
            ('/files/serve/([^/]+)?', ServeHandler),
           ], debug=True)
     run_wsgi_app(application)
