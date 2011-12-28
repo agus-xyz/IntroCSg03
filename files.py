@@ -48,7 +48,6 @@ class MainPage(webapp.RequestHandler):
                             'action': upload_url
                             }
 
-
         path = os.path.join(os.path.dirname(__file__), 'html/upload.html')
         self.response.out.write(template.render(path, template_values))
         
@@ -58,6 +57,7 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
         studentid = self.request.get('studentid')
         password = self.request.get('password')
         users = User.all()
+        user = None
         for u in users:
             if u.studentid == studentid:
                 if u.password == password:
@@ -65,36 +65,36 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
                     break
                 else:
                     break
+
+        if user:
+            title = self.request.get('title')
+            course = Course.get_by_id(int(self.request.get('course')))
+            blob_info = upload_files[0]
+            if blob_info:
+                bly = bitly.BitLy('o_2tov7hc8mi', 'R_e863d338484e0fbb60cf1416ce3ae6de')
+                uri = str(os.environ.get('SERVER_NAME'))
+                uri = uri + '/resource/' + str(blob_info.key())
+                short = bly.shorten(uri)
+                uri2 = 'http://%s' % uri
+                short = short['results'][uri2]['shortUrl']
+                if short:
+                    pass
+                else:
+                    short = 'uri2'
             
-        if not user:
-            self.redirect('/upload/wrong_user') 
-            
-        title = self.request.get('title')
-        course = Course.get_by_id(int(self.request.get('course')))   
-        
-        blob_info = upload_files[0]
-        if blob_info:
-            bly = bitly.BitLy('o_2tov7hc8mi', 'R_e863d338484e0fbb60cf1416ce3ae6de')
-            uri = str(os.environ.get('SERVER_NAME'))
-            uri = uri + '/resource/' + str(blob_info.key())
-            short = bly.shorten(uri)
-            uri2 = 'http://%s' % uri
-            short = short['results'][uri2]['shortUrl']
-            if short:
-                pass
+                resource = Resource(res_title=title,
+                                    res_filekey=str(blob_info.key()),
+                                    res_course=course, 
+                                    res_filekey2=str(blob_info.key()),
+                                    res_short_uri=short,
+                                    res_user = user)
+                resource.put()
+                self.redirect('/resource/%s' % str(blob_info.key()))
             else:
-                short = 'uri2'
-            
-            resource = Resource(res_title=title,
-                                res_filekey=str(blob_info.key()),
-                                res_course=course, 
-                                res_filekey2=str(blob_info.key()),
-                                res_short_uri=short,
-                                res_user = user)
-            resource.put()
-            self.redirect('/resource/%s' % str(blob_info.key()))
+                self.redirect('/upload/wrong_file')
         else:
-            self.error(404)
+            self.redirect('/upload/wrong_user') 
+        
 
 class ServeHandler(blobstore_handlers.BlobstoreDownloadHandler):
     def get(self, resource):
@@ -102,10 +102,44 @@ class ServeHandler(blobstore_handlers.BlobstoreDownloadHandler):
         blob_info = blobstore.BlobInfo.get(resource)
         self.send_blob(blob_info)
         
+class WrongUser(webapp.RequestHandler):
+    def get(self):
+        title='Authentication error'
+        message='The user does not exist or the user and password provided do not match.'
+        method='get'
+        action='/upload'
+        value='Try again'
+        template_values = {'title': title,
+                           'message': message,
+                           'method': method,
+                           'action': action,
+                           'value': value}
+         
+        path = os.path.join(os.path.dirname(__file__), 'html/message.html')
+        self.response.out.write(template.render(path, template_values))
+        
+class WrongFile(webapp.RequestHandler):
+    def get(self):
+        title='File error'
+        message='Some error occurred uploading your file, please try again. Report the problem if it persists'
+        method='get'
+        action='/upload'
+        value='Try again'
+        template_values = {'title': title,
+                           'message': message,
+                           'method': method,
+                           'action': action,
+                           'value': value}
+         
+        path = os.path.join(os.path.dirname(__file__), 'html/message.html')
+        self.response.out.write(template.render(path, template_values))        
+        
 def main():
     application = webapp.WSGIApplication(
           [('/upload', MainPage),
            ('/upload/submit', UploadHandler),
+           ('/upload/wrong_user', WrongUser),
+           ('/upload/wrong_file', WrongFile)
            ('/files/serve/([^/]+)?', ServeHandler),
           ], debug=True)
     run_wsgi_app(application)

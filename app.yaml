@@ -29,7 +29,7 @@ handlers:
 - url: /upload.*
   script: files.py
 
-- url: /files/.*
+- url: /files.*
   script: files.py
 
 - url: /signup.*
