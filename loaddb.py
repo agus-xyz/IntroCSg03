@@ -59,16 +59,14 @@ class Courses(webapp.RequestHandler):
         
         comp = None
         for dep in departments:
+            course = Course(cour_name = 'course1 of '+ dep.dep_name, cour_department=dep)
+            course.put()
             if dep.dep_name == 'Department of Computer Science and Information Engineering':
-                comp = dep
-                break
+                comp = dep       
         
-        course1 = Course(cour_name = 'course 1', cour_department=comp)
-        course1.put()
-        course2 = Course(cour_name = 'course 2', cour_department=comp)
-        course2.put()
-        course3 = Course(cour_name = 'course 3', cour_department=comp)
-        course3.put()
+        
+        i2c = Course(cour_name = 'Introduction to Computers', cour_department=comp)
+        i2c.put()
          
         template_values = {'title': 'data loaded',
                            'message': 'courses loaded',
