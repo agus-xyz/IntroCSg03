@@ -18,10 +18,12 @@ class MainPage(webapp.RequestHandler):
             content_type = blob_instance.content_type
             query = db.GqlQuery("SELECT * FROM Resource WHERE res_filekey2=:1", str(resource))
             download_link = ''.join([self.request.host_url, '/resource/loader/', resource])
+            fb_link = ''.join([self.request.host_url, '/resource/', resource])
             template_values = {
             'resource' : query[0],                   
             'download_link': download_link,
-            'type': content_type
+            'type': content_type,
+            'fb_link': fb_link
             }
             path = os.path.join(os.path.dirname(__file__), 'html/resource.html')
             self.response.out.write(template.render(path, template_values))

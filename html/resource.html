@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" lang="en">
 
 
 <!-- Version: Multiflex-5.4 / Overview -->
@@ -11,6 +11,7 @@
 <!-- "Design by 1234.info". Thank you! -->
 
 <head>
+  <meta property="fb:admins" content="Aisman64"/>
   <link rel="stylesheet" type="text/css" media="screen,projection,print" href="/stylesheets/mf54_reset.css" />
   <link rel="stylesheet" type="text/css" media="screen,projection,print" href="/stylesheets/mf54_grid_nosidebar.css" />
   <link rel="stylesheet" type="text/css" media="screen,projection,print" href="/stylesheets/mf54_content_nosidebar.css" />
@@ -23,6 +24,14 @@
 <!--[if IE]><style type="text/css"> body {word-wrap: break-word;}</style><![endif]-->
 
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
   <!-- CONTAINER FOR ENTIRE PAGE -->
   <div class="container">
 
@@ -38,7 +47,6 @@
     
         <!-- A.2 BUTTON NAVIGATION -->
         <div class="navbutton">
-          <ul>
         </div>
 
         <!-- A.3 GLOBAL NAVIGATION -->
@@ -138,8 +146,8 @@
 						</p>
 			</fieldset>
 			</div>
-        </div>
-        <div class="corner-content-1col-bottom"></div>
+        </div>                  
+		<fb:comments href="{{fb_link}}" num-posts="2" width="958" colorscheme="dark"></fb:comments>                            
           </div>
         </div>
    <!-- D. FOOTER -->
