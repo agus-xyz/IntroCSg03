@@ -70,9 +70,7 @@
 <div class="sitename">
 </div>
 <!-- A.2 BUTTON NAVIGATION -->
-<div class="navbutton">
-<ul>
-</div>
+<div class="navbutton"></div>
 <!-- A.3 GLOBAL NAVIGATION -->
 <div class="navglobal">
 <ul>
@@ -85,7 +83,7 @@
 <div class="header-bottom">
 <!-- Breadcrumb -->
 <ul>
-<li class="nobullet">You are here:&nbsp;</li>
+<li class="nobullet"></li>
 <li><a href="/">Home</a></li>
 <li><a href="#">Upload a Resource</a></li>
 </ul>
@@ -139,15 +137,15 @@
 </p>
 <p>
 <label for="file" class="left">File: </label>
-<input type="file" name="file" id="file" value="" tabindex="3">
+<input type="file" name="file" id="file" value="" tabindex="3"/>
 </p>
 <p>
 <label for="title" class="left">Title: </label>
-<input type="text" name="title" id="title" class="field" value="" tabindex="4">
+<input type="text" name="title" id="title" class="field" value="" tabindex="4"/>
 </p>
 <p>
 											<label for="college" class="left">College: </label>
-											<select name="college" id="college" class="combo" onChange="dropdowndepartments(document.getElementById('college').value);">
+											<select name="college" id="college" class="combo" onchange="dropdowndepartments(document.getElementById('college').value);">
 												<option value="choose"> Select... </option>
 												{% for college in colleges %}
 												<option value="{{ college.key.id }}">{{ college.col_name }}</option>
@@ -156,7 +154,7 @@
 										</p>
 										<p>
 											<label for="department" class="left">Department: </label>
-											<select name="department" id="department" class="combo" onChange="dropdowncourses(document.getElementById('department').value);">
+											<select name="department" id="department" class="combo" onchange="dropdowncourses(document.getElementById('department').value);">
 												<option value="choose"> Select... </option>
 											</select>
 										</p>
@@ -178,9 +176,10 @@
 
 <!-- D. FOOTER -->
 <div class="footer">
-			  <p>Copyright &copy; 2008 Your Company&nbsp;&nbsp;|&nbsp;&nbsp;All Rights Reserved</p>
-			  <p class="credits">Design by <a href="http://1234.info/" title="Designer Homepage">1234.info</a> | Modified by <a href="#" title="Modifyer Homepage">The Foreigners</a> | Powered by <a href="#" title="CMS Homepage">IntroCS</a> | Media Player by <a href="http://www.jeroenwijering.com" title="Media Player Credits">Jeroen Wijering</a>  | <a href="http://validator.w3.org/check?uri=referer" title="Validate XHTML code">XHTML 1.0</a> | <a href="http://jigsaw.w3.org/css-validator/" title="Validate CSS code">CSS 2.0</a></p>
+			  <p>Copyright &copy; 2011 Taskbook&nbsp;&nbsp;|&nbsp;&nbsp;All Rights Reserved</p>
+			  <p class="credits">Design by <a href="http://1234.info/" title="Designer Homepage">1234.info</a> | Modified by <a href="#" title="Modifyer Homepage">The Foreigners</a> | Powered by <a href="#" title="CMS Homepage">IntroCS</a> | <a href="http://validator.w3.org/check?uri=referer" title="Validate XHTML code">XHTML 1.0</a> | <a href="http://jigsaw.w3.org/css-validator/" title="Validate CSS code">CSS 2.0</a></p>
 			</div>
-			<div class="corner-page-bottom"></div>    
+			<div class="corner-page-bottom"></div>  
+			</div>  
 </body>
 </html>
