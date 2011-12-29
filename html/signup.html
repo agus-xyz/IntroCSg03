@@ -36,7 +36,6 @@
 					</div>
 					<!-- A.2 BUTTON NAVIGATION -->
 					<div class="navbutton">
-						<ul>
 					</div>
 					<!-- A.3 GLOBAL NAVIGATION -->
 					<div class="navglobal">
@@ -50,7 +49,7 @@
 				<div class="header-bottom">
 					<!-- Breadcrumb -->
 					<ul>
-					  <li class="nobullet">You are here:&nbsp;</li>
+					  <li class="nobullet"></li>
 					  <li><a href="/">Home</a></li>
 					  <li><a href="/signup">Sign Up</a></li>
 					</ul>
@@ -95,15 +94,15 @@
 							<fieldset>
 							<legend>Fill the form</legend>
 							<form method="post" action="/signup/newUser"> 
-                <p><label for="contact_firstname_1" class="left">Name:</label>
+                <p><label for="name" class="left">Name:</label>
                    <input type="text" name="name" id="name" class="field" value="" tabindex="1" /></p>
-                <p><label for="contact_familyname_1" class="left">Student ID:</label>
+                <p><label for="studentid" class="left">Student ID:</label>
                    <input type="text" name="studentid" id="studentid" class="field" value="" tabindex="1" /></p>
-                <p><label for="contact_street_1" class="left">Password:</label>
+                <p><label for="password" class="left">Password:</label>
                    <input type="password" name="password" id="password" class="field" value="" tabindex="1" /></p>
-                <p><label for="contact_postalcode_1" class="left">Email:</label>
+                <p><label for="email" class="left">Email:</label>
                    <input type="text" name="email" id="email" class="field" value="" tabindex="1" /></p>
-                <p><label for="contact_city_1" class="left">College:</label>
+                <p><label for="college" class="left">College:</label>
                		<select name="college" id="college" class="combo">
                   	<option value="choose"> Select... </option>
 						{% for college in colleges %}
@@ -120,9 +119,10 @@
 			</div>
 			<!-- D. FOOTER -->      
 			<div class="footer">
-			  <p>Copyright &copy; 2008 Your Company&nbsp;&nbsp;|&nbsp;&nbsp;All Rights Reserved</p>
-			  <p class="credits">Design by <a href="http://1234.info/" title="Designer Homepage">1234.info</a> | Modified by <a href="#" title="Modifyer Homepage">The Foreigners</a> | Powered by <a href="#" title="CMS Homepage">IntroCS</a> | Media Player by <a href="http://www.jeroenwijering.com" title="Media Player Credits">Jeroen Wijering</a>  | <a href="http://validator.w3.org/check?uri=referer" title="Validate XHTML code">XHTML 1.0</a> | <a href="http://jigsaw.w3.org/css-validator/" title="Validate CSS code">CSS 2.0</a></p>
+			  <p>Copyright &copy; 2011 Taskbook&nbsp;&nbsp;|&nbsp;&nbsp;All Rights Reserved</p>
+			  <p class="credits">Design by <a href="http://1234.info/" title="Designer Homepage">1234.info</a> | Modified by <a href="#" title="Modifyer Homepage">The Foreigners</a> | Powered by <a href="#" title="CMS Homepage">IntroCS</a> | <a href="http://validator.w3.org/check?uri=referer" title="Validate XHTML code">XHTML 1.0</a> | <a href="http://jigsaw.w3.org/css-validator/" title="Validate CSS code">CSS 2.0</a></p>
 			</div>
-			<div class="corner-page-bottom"></div>         
+			<div class="corner-page-bottom"></div>    
+			</div>     
 	</body>
 </html>
