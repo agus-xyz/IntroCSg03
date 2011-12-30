@@ -170,7 +170,6 @@
 .main a:visited {color:rgb(42,90,138);}
 
 /*Image links */
-.main a img {border:solid 3px rgb(200,200,200);}
 .main a:hover img {border:solid 3px rgb(175,175,175);}
 
 /******************************************/
@@ -179,4 +178,3 @@
 /*  then add them here in order to avoid  */
 /*  a mixup with the default styles.      */
 /******************************************/
-.fb-comments { background-color: rgb(255,255,255) }

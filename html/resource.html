@@ -17,6 +17,18 @@
   <link rel="stylesheet" type="text/css" media="screen,projection,print" href="/stylesheets/mf54_content_nosidebar.css" />
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
   <title>Taskbook</title>
+  <script>!function(d,s,id)
+  {var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id))
+  	{js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}
+  	}(document,"script","twitter-wjs");
+  </script>
+  <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 </head>
 
 <!-- Global IE fix to avoid layout crash when single word size wider than column width -->
@@ -25,13 +37,7 @@
 
 <body>
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+
   <!-- CONTAINER FOR ENTIRE PAGE -->
   <div class="container">
 
@@ -114,39 +120,13 @@
           <div class="videoplayer">
 			<object type="text/html" data="http://docs.google.com/viewer?url={{download_link}}&amp;embedded=true" width="908" height="532"></object>
           </div>
-          <div class="contactform">
-			<fieldset>
-				<legend>Resource Info</legend>
-						<p>
-							<label class="left">Title: </label>
-							<label>{{resource.res_title}}</label>
-						</p>
-						<p>
-							<label class="left">Course: </label>
-							<label>{{resource.res_course.cour_name}}</label>
-						</p>
-						<p>
-							<label class="left">Author: </label>
-							<label>{{resource.res_author.name}}</label>
-						</p>
-						<p>
-							<label class="left">Type: </label>
-							<label>{{type}}</label>
-						</p>
-						<p>
-							<label class="left">Date: </label>
-							<label>{{resource.res_add_date|date:"d.m.Y"}}</label>	
-						</p>
-						<p>
-							<label class="left">Short Link: </label>
-							<label><a href="{{resource.res_short_uri}}">{{resource.res_short_uri}}</a></label>
-						</p>
-						<p>
-							<label class="left"><a href="{{download_link}}">Download</a></label>
-						</p>
-			</fieldset>
-			</div>
-        </div>                  
+        </div>
+        <div class="corner-content-1col-bottom"></div>
+        <p><a href="{{download_link}}"><img src="/images/download.png"></img></a>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-size="large"
+        data-url="{{resource.res_short_uri}}" data-count_url="{{fb_link}}" data-count="horizontal">Tweet</a>
+        <fb:like href="{{fb_link}}" send="true" width="400" show_faces="false" action="recommend" colorscheme="dark"></fb:like>
+        </p>                
 		<fb:comments href="{{fb_link}}" num-posts="2" width="958" colorscheme="dark"></fb:comments>                            
           </div>
         </div>
