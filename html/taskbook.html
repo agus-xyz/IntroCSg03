@@ -131,8 +131,8 @@
 											<label for="college" class="left">College: </label>
 											<select name="college" id="college" class="combo" onchange="dropdowndepartments(document.getElementById('college').value);">
 												<option value="choose"> Select... </option>
-												{% for college in colleges %}
-												<option value="{{ college.key.id }}">{{ college.col_name }}</option>
+												{% for college in colleges.items %}
+												<option value="{{ college.0 }}">{{ college.1 }}</option>
 												{% endfor %}
 											</select>
 										</p>

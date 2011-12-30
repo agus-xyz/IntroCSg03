@@ -1,4 +1,5 @@
 import os
+import model
 from model import College
 from model import Department
 from model import Course
@@ -11,28 +12,18 @@ from django.utils import simplejson
 
 class MainPage(webapp.RequestHandler):
     def get(self):
-        colleges = College.all()
-        departments = Department.all()
-        courses = Course.all()
+        colleges = model.get_colleges()
+        departments = model.get_departments()
+        courses = model.get_courses()
         
-        dep_name = []
-        dep_id = []
-        dep_college = []
+        dep_name = departments[0]
+        dep_id = departments[1]
+        dep_college = departments[2]
         
-        cour_name = []
-        cour_id = []
-        cour_department = []
-        
-        for department in departments:
-            dep_name.append(department.dep_name)
-            dep_id.append(department.key().id())
-            dep_college.append(department.dep_college.key().id())
-            
-        for course in courses:
-            cour_name.append(course.cour_name)
-            cour_id.append(course.key().id())
-            cour_department.append(course.cour_department.key().id())    
-        
+        cour_name = courses[0]
+        cour_id = courses[1]
+        cour_department = courses[2]
+              
         template_values = { 'colleges': colleges,
                             'departments_name' : simplejson.dumps(dep_name),
                             'departments_id' : simplejson.dumps(dep_id),

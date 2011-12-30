@@ -1,4 +1,5 @@
 import os
+import model
 from model import College
 from model import Resource
 from model import Department
@@ -14,27 +15,18 @@ from apis import bitly
 
 class MainPage(webapp.RequestHandler):
     def get(self):
-        colleges = College.all()
-        departments = Department.all()
-        courses = Course.all()
+        colleges = model.get_colleges()
+        departments = model.get_departments()
+        courses = model.get_courses()
         
-        dep_name = []
-        dep_id = []
-        dep_college = []
+        dep_name = departments[0]
+        dep_id = departments[1]
+        dep_college = departments[2]
         
-        cour_name = []
-        cour_id = []
-        cour_department = []
-        
-        for department in departments:
-            dep_name.append(department.dep_name)
-            dep_id.append(department.key().id())
-            dep_college.append(department.dep_college.key().id())
+        cour_name = courses[0]
+        cour_id = courses[1]
+        cour_department = courses[2]
             
-        for course in courses:
-            cour_name.append(course.cour_name)
-            cour_id.append(course.key().id())
-            cour_department.append(course.cour_department.key().id())    
         
         upload_url = blobstore.create_upload_url('/upload/submit')
                 
