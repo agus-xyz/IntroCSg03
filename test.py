@@ -1,19 +1,6 @@
-#!/usr/bin/env python
-#
-import os
-import urllib
-import sys
-import model
-
-from google.appengine.api import users
-from google.appengine.ext import blobstore
 from google.appengine.ext import webapp
-from google.appengine.ext.webapp import blobstore_handlers
-from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
-from google.appengine.ext import db
-from django.utils import simplejson
-from apis import bitly
+
 from google.appengine.api import memcache
 
 class Test(webapp.RequestHandler):
@@ -27,7 +14,7 @@ class Flush(webapp.RequestHandler):
     def get(self):
         a = memcache.flush_all()
         if a == True:
-          self.response.out.write('Flush Succesfully Completed')  
+            self.response.out.write('Flush Succesfully Completed')  
 
 def main():
     application = webapp.WSGIApplication(
@@ -37,4 +24,4 @@ def main():
     run_wsgi_app(application)
 
 if __name__ == '__main__':
-  main()
+    main()

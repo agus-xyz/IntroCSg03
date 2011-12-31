@@ -1,7 +1,5 @@
 import os
 import model
-from model import College
-from model import Department
 from model import Course
 from model import Resource
 from google.appengine.ext.webapp import template
