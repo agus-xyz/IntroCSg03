@@ -118,11 +118,13 @@
         <div class="content-1col-nobox">
           <h1 class="video">{{resource.res_title}}</h1>
           <div class="videoplayer">
-			<object type="text/html" data="http://docs.google.com/viewer?url={{download_link}}&amp;embedded=true" width="908" height="532"></object>
+			<iframe src="http://docs.google.com/viewer?url={{download_link}}&amp;embedded=true&amp" width="908" height="532"></iframe>
           </div>
         </div>
         <div class="corner-content-1col-bottom"></div>
-        <p><a href="{{download_link}}"><img src="/images/download.png"></img></a>
+        <p>
+        <a href="{{resource.res_short_uri}}"><img src="{{resource.res_short_uri}}.qrcode" class="qrcode" height="50px" width="50px"></img></a>
+        <a href="{{download_link}}"><img src="/images/download.png"></img></a>
         <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-size="large"
         data-url="{{resource.res_short_uri}}" data-count_url="{{fb_link}}" data-count="horizontal">Tweet</a>
         <fb:like href="{{fb_link}}" send="true" width="400" show_faces="false" action="recommend" colorscheme="dark"></fb:like>
